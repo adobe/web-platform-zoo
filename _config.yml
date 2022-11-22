@@ -1,0 +1,3 @@
+source: .
+markdown: kramdown
+theme: minima

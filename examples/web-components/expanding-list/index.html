@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Web Components Example</title>
+  <style>
+    ul {
+      list-style-type: none;
+    }
+
+    li::before {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.25rem;
+      content: "";
+    }
+
+    .open::before,
+    .closed::before {
+      background-size: 1rem 1rem;
+      position: relative;
+      top: 0.25rem;
+      opacity: 0.3;
+    }
+
+    .open::before {
+      background-image: url(img/down.png);
+    }
+
+    .closed::before {
+      background-image: url(img/right.png);
+    }
+
+    .closed .closed::before,
+    .closed .open::before {
+      display: none;
+    }
+  </style>
+
+  <!-- Polyfills for webkit, from https://github.com/ungap/custom-elements -->
+  <script src="//unpkg.com/@ungap/custom-elements/es.js"></script>
+</head>
+
+<body>
+  <section>
+    <h1>Expanding List Web Components example</h1>
+    <p>
+      This example is from
+      <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">mdn: using custom
+        elements</a>
+    </p>
+  </section>
+  <section>
+    <h2>Click on (some) list elements to expand them</h2>
+    <ul is="expanding-list">
+      <li>UK
+        <ul>
+          <li id="yorkshire">Yorkshire
+            <ul>
+              <li>Leeds
+                <ul>
+                  <li>Train station</li>
+                  <li>Town hall</li>
+                  <li>Headrow</li>
+                </ul>
+              </li>
+              <li>Bradford</li>
+              <li>Hull</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>USA
+        <ul>
+          <li>California
+            <ul>
+              <li>Los Angeles</li>
+              <li>San Francisco</li>
+              <li>Berkeley</li>
+            </ul>
+          </li>
+          <li>Nevada</li>
+          <li>Oregon</li>
+        </ul>
+      </li>
+    </ul>
+    <ul>
+      <li>This list is not expandable</li>
+      <li>So this and the next item...</li>
+      <li>Are always visible.</li>
+    </ul>
+  </section>
+  <script src="./expanding-list.js"></script>
+</body>
+
+</html>

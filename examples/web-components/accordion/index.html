@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Accordion Web Components Example</title>
+
+  <style>
+    details div {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>Accordion Web Component example</h1>
+  </section>
+  <section>
+    <p>
+      The following accordion elements are enhanced by the custom
+      <code>&lt;accordion-details&gt;</code> element to be <em>mutually exclusive</em>,
+      opening one closes all others.
+    </p>
+    <accordion-details>
+        <details>
+          <summary>The first item</summary>
+          <div>Here's the description of item one</div>
+        </details>
+        <details open>
+          <summary>The second item</summary>
+          <div>Here's the description of item <em>two</em></div>
+        </details>
+        <details>
+          <summary>The third, longer item</summary>
+          <div>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Web Components</a>
+            is a suite of different technologies allowing you to create reusable custom elements
+            (with their functionality encapsulated away from the rest of your code)
+            and utilize them in your web apps.
+          </div>
+        </details>
+    </accordion-details>
+  <script src="./accordion-details.js"></script>
+</body>
+
+</html>

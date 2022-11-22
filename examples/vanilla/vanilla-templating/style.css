@@ -1,0 +1,53 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+}
+
+#activities li {
+  display: inline;
+  background-color: blue;
+  opacity: 30%;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+#activities .selected {
+  color: yellow;
+  background-color: blue;
+  opacity: 100%;
+}
+
+#results {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: "Montserrat", Sans-serif;
+}
+
+.result-card {
+  width: 300px;
+  height: 300px;
+  background: #f8f8f8;
+  margin: 10px;
+  padding: 10px;
+}
+
+.result-card img {
+  object-fit: cover;
+  width: 100%;
+  height: 225px;
+}
+
+.result-card h3 {
+  display: flex;
+  list-style-type: none;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.result-card h2 {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
