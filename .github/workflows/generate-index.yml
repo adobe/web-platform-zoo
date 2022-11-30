@@ -1,0 +1,29 @@
+name: Generate the examples index
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: generate examples.json
+        run: |
+          ./generate-index.sh > examples.json
+
+      - name: setup git config
+        run: |
+          # need username and email for commit
+          git config user.name "generate-index Action"
+          git config user.email "<>"
+
+      - name: commit
+        run: |
+          git add examples.json
+          git commit -m "update examples.json" || echo "No changes to commit"
+          git push origin main

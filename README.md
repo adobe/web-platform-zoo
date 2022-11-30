@@ -2,10 +2,8 @@
 
 > ** WORK IN PROGRESS **
 
-A collection of code examples meant to promote and explain the Web Platform to developers.
-
-This repository is structured for publishing to GitHub Pages, which is
-the main way of accessing the examples.
+This content is published to https://opensource.adobe.com/web-platform-zoo/ as 
+a collection of code examples meant to promote and explain the Web Platform to developers.
 
 It also provides automated tests, here's how to run them:
 
