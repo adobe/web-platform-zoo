@@ -2,6 +2,13 @@
 "WARNING":"auto-generated, do not edit!",
 "examples": [
 {
+"path":"./examples/vanilla/vanilla-templating/",
+"data": {
+  "name": "Vanilla templating",
+  "tags": [ "vanilla", "templating" ]
+}
+},
+{
 "path":"./examples/web-components/expanding-list/",
 "data": {
   "name": "Expanding List Web Component",
@@ -13,13 +20,6 @@
 "data": {
   "name": "Accordion Web Component",
   "tags": [ "webcomponent", "accordion" ]
-}
-},
-{
-"path":"./examples/vanilla/vanilla-templating/",
-"data": {
-  "name": "Vanilla templating",
-  "tags": [ "vanilla", "templating" ]
 }
 },
 {}]}
