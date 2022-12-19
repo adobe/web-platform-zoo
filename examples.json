@@ -9,17 +9,17 @@
 }
 },
 {
-"path":"./examples/web-components/expanding-list/",
-"data": {
-  "name": "Expanding List Web Component",
-  "tags": [ "webcomponent", "list" ]
-}
-},
-{
 "path":"./examples/web-components/accordion/",
 "data": {
   "name": "Accordion Web Component",
   "tags": [ "webcomponent", "accordion" ]
+}
+},
+{
+"path":"./examples/web-components/expanding-list/",
+"data": {
+  "name": "Expanding List Web Component",
+  "tags": [ "webcomponent", "list" ]
 }
 },
 {}]}

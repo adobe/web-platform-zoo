@@ -10,7 +10,7 @@ function addPath() {
 echo "{"
 echo "\"WARNING\":\"auto-generated, do not edit!\","
 echo "\"examples\": ["
-find . -name info.json | while read addPath
+find . -name info.json | sort | while read addPath
 do
   addPath $addPath
 done  
