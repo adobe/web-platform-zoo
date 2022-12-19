@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/bdelacretaz/web-platform-experiments#readme",
   "dependencies": {
-    "@playwright/test": "^1.27.0",
     "@ungap/custom-elements": "^1.1.0",
     "node-static": "^0.7.11"
   },
   "devDependencies": {
+    "@playwright/test": "^1.29.0",
     "nodemon": "^2.0.20"
   }
 }
