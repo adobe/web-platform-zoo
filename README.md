@@ -15,7 +15,16 @@ It also provides automated tests, here's how to run them:
 For now the website is just a collection of static pages, running an HTTP server
 in the root folder is sufficient to test it.
 
+## Useful Playwright command examples
+
+Examples used to generate & debug the `todomvc` tests:
+
+ * npx playwright codegen http://localhost:8000
+ * npx playwright test -g todomvc --project firefox
+ * npx playwright test -g todomvc --project firefox --timeout 25000 --debug
+
 ## TODO
 
+* Finish implementing the todomvc tests
 * Flesh out the minimal template tests, including no-JS variant
 * Publish only if the Playwright tests succeed
