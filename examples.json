@@ -22,4 +22,11 @@
   "tags": [ "webcomponent", "list" ]
 }
 },
+{
+"path":"./examples/web-components/todomvc/",
+"data": {
+  "name": "TodoMVC using Web Components",
+  "tags": [ "webcomponent", "todomvc" ]
+}
+},
 {}]}
