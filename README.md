@@ -12,9 +12,8 @@ It also provides automated tests, here's how to run them:
 
 ## How to test the website locally
 
-There are many ways to do this, including
-
-    docker run -p 4000:4000 -v $(pwd):/site bretfisher/jekyll-serve
+For now the website is just a collection of static pages, running an HTTP server
+in the root folder is sufficient to test it.
 
 ## TODO
 
