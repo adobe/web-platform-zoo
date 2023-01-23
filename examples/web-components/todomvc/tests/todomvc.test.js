@@ -15,7 +15,12 @@ governing permissions and limitations under the License.
 
 const { test, expect } = require('@playwright/test');
 
-const initialItemsCount = 3;
+const initialItems = [
+  "Rule the world",
+  "Rewrite the rules",
+  "This is done"
+];
+const initialItemsCount = initialItems.length;
 
 class Wrapper {
   #page;
@@ -37,9 +42,13 @@ class Wrapper {
   }
 
   async assertItemValue(zeroBasedItemIndex, expectedValue) {
-    // TODO: there's probably a simpler way to get the value of those custom elements
     const actual = await this.#page.evaluate(`document.querySelectorAll('todo-item')[${zeroBasedItemIndex}].value`);
     expect(actual).toBe(expectedValue);
+  }
+
+  async assertDisplayedItemsCount(expectedCount) {
+    const actual = await this.#page.evaluate(`document.querySelectorAll('todo-item').length`);
+    expect(actual).toBe(expectedCount);
   }
 
   async assertCountDisplay(count) {
@@ -82,10 +91,10 @@ test.describe('TodoMVC using Web Components', () => {
     await expect(w.filtersAndStatus).not.toBeVisible();
   });
 
-  test.only("Edit the second item", async ({ page }) => {
+  test("Edit the second item", async ({ page }) => {
     const w = new Wrapper(page);
 
-    const oldText = 'Rewrite the rules';
+    const oldText = initialItems[1];
     const addedText = 'rulesrules'
     const newText = oldText + addedText;
 
@@ -97,8 +106,26 @@ test.describe('TodoMVC using Web Components', () => {
     await w.assertItemValue(1, newText);
   });
 
-  test("Item filters", async ({ page }) => {
+  test("Item display filters", async ({ page }) => {
     const w = new Wrapper(page);
-    // TODO
+    await w.assertItemValue(0, initialItems[0]);
+    await w.assertItemValue(1, initialItems[1]);
+    await w.assertItemValue(2, initialItems[2]);
+    await w.assertDisplayedItemsCount(3);
+
+    await page.getByRole('link', { name: 'Active' }).click();
+    await w.assertItemValue(0, initialItems[0]);
+    await w.assertItemValue(1, initialItems[1]);
+    await w.assertDisplayedItemsCount(2);
+
+    await page.getByRole('link', { name: 'Completed' }).click();
+    await w.assertItemValue(0, initialItems[2]);
+    await w.assertDisplayedItemsCount(1);
+
+    await page.getByRole('link', { name: 'All' }).click();
+    await w.assertItemValue(0, initialItems[0]);
+    await w.assertItemValue(1, initialItems[1]);
+    await w.assertItemValue(2, initialItems[2]);
+    await w.assertDisplayedItemsCount(3);
   });
 });
