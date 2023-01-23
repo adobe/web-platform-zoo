@@ -20,6 +20,7 @@ class Wrapper {
   filtersAndStatus;
   markAllComplete;
   clearCompleted;
+  secondItem;
 
   constructor(page) {
     this.input = page.getByPlaceholder('What needs to be done?');
@@ -27,6 +28,7 @@ class Wrapper {
     this.filtersAndStatus = page.locator('//footer[@class="footer"]');
     this.markAllComplete = page.getByText('Mark all as complete');
     this.clearCompleted = page.getByRole('button', { name: 'Clear completed' });
+    this.secondItem = page.locator('//todo-item[2]');
   }
 
   async assertCountDisplay(count) {
@@ -69,14 +71,20 @@ test.describe('TodoMVC using Web Components', () => {
     await expect(w.filtersAndStatus).not.toBeVisible();
   });
 
-  test("Edit an item", async ({ page }) => {
+  test("Edit the second item", async ({ page }) => {
     const w = new Wrapper(page);
-    /* TODO
-    await page
-      .getByRole('label')
-      .filter({ hasText: /Rewrite the rules/})
-      .dblclick();
-    */
+
+    const oldText = 'Rewrite the rules';
+    const addedText = 'rulesrules'
+    const newText = oldText + addedText;
+
+    await expect(w.secondItem).toContainText(oldText);
+    await expect(w.secondItem).not.toContainText(newText);
+    await w.secondItem.dblclick();
+    await w.secondItem.type(addedText);
+    await w.secondItem.press('Enter');
+    await w.assertCountDisplay(initialItemsCount);
+    await expect(w.secondItem).toContainText(newText);
   });
 
   test("Item filters", async ({ page }) => {

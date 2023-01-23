@@ -128,7 +128,8 @@ class TodoItem extends HTMLElement {
   #text;
 
   connectedCallback() {
-    const shadowRoot = this.attachShadow({mode:"closed"});
+    // TODO this should ideally be "closed" but how to test that with Playwright?
+    const shadowRoot = this.attachShadow({mode:"open"});
     const style = shadowRoot.appendChild(document.createElement('style'));
     style.innerHTML = styles;
     this.#item = document.createElement('li');

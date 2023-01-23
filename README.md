@@ -26,5 +26,6 @@ Examples used to generate & debug the `todomvc` tests:
 ## TODO
 
 * Finish implementing the todomvc tests
+* How to test closed shadow DOM with Playwright?
 * Flesh out the minimal template tests, including no-JS variant
 * Publish only if the Playwright tests succeed
