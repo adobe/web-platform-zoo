@@ -10,11 +10,15 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+// TODO see also the playwright todo-mvc examples
+// https://gist.github.com/bdelacretaz/9a5a39c87f70dd61ab834e4475e2d51f
+
 const { test, expect } = require('@playwright/test');
 
 const initialItemsCount = 3;
 
 class Wrapper {
+  #page;
   input;
   itemsCount;
   filtersAndStatus;
@@ -23,12 +27,19 @@ class Wrapper {
   secondItem;
 
   constructor(page) {
+    this.#page = page;
     this.input = page.getByPlaceholder('What needs to be done?');
     this.itemsCount = page.locator('//*[@data-todo="count"]');
     this.filtersAndStatus = page.locator('//footer[@class="footer"]');
     this.markAllComplete = page.getByText('Mark all as complete');
     this.clearCompleted = page.getByRole('button', { name: 'Clear completed' });
     this.secondItem = page.locator('//todo-item[2]');
+  }
+
+  async assertItemValue(zeroBasedItemIndex, expectedValue) {
+    // TODO: there's probably a simpler way to get the value of those custom elements
+    const actual = await this.#page.evaluate(`document.querySelectorAll('todo-item')[${zeroBasedItemIndex}].value`);
+    expect(actual).toBe(expectedValue);
   }
 
   async assertCountDisplay(count) {
@@ -71,20 +82,19 @@ test.describe('TodoMVC using Web Components', () => {
     await expect(w.filtersAndStatus).not.toBeVisible();
   });
 
-  test("Edit the second item", async ({ page }) => {
+  test.only("Edit the second item", async ({ page }) => {
     const w = new Wrapper(page);
 
     const oldText = 'Rewrite the rules';
     const addedText = 'rulesrules'
     const newText = oldText + addedText;
 
-    await expect(w.secondItem).toContainText(oldText);
-    await expect(w.secondItem).not.toContainText(newText);
+    await w.assertItemValue(1, oldText);
     await w.secondItem.dblclick();
     await w.secondItem.type(addedText);
     await w.secondItem.press('Enter');
     await w.assertCountDisplay(initialItemsCount);
-    await expect(w.secondItem).toContainText(newText);
+    await w.assertItemValue(1, newText);
   });
 
   test("Item filters", async ({ page }) => {

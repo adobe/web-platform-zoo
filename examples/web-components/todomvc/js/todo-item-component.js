@@ -128,8 +128,7 @@ class TodoItem extends HTMLElement {
   #text;
 
   connectedCallback() {
-    // TODO this should ideally be "closed" but how to test that with Playwright?
-    const shadowRoot = this.attachShadow({mode:"open"});
+    const shadowRoot = this.attachShadow({mode:"closed"});
     const style = shadowRoot.appendChild(document.createElement('style'));
     style.innerHTML = styles;
     this.#item = document.createElement('li');
@@ -159,6 +158,10 @@ class TodoItem extends HTMLElement {
 		textInput.addEventListener("focusout", () => {
 			li.classList.remove("editing");
 		});
+	}
+
+	get value() {
+		return this.#item?.textContent?.trim();
 	}
 
   _render() {
