@@ -1,10 +1,6 @@
-# Bertrand's Web Components [TodoMVC](http://todomvc.com) experiments
+# [TodoMVC](http://todomvc.com) with Web Components
 
-Experimenting with Web Components to reproduce the [TodoMVC](http://todomvc.com) application.
-
-## TODO
-- Add Playwright tests
-- Move to Web Platform Zoo (with Adobe licence headers)
+Using Web Components to reproduce the [TodoMVC](http://todomvc.com) application.
 
 ## Links
 
