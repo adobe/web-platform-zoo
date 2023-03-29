@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Carousel Web Components Example</title>
+  <link rel="stylesheet" href="../../../classless.css">
+  <style>
+    simple-carousel ul {
+      list-style-type: none;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="../../../">Home</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h1>Carousel Web Component example</h1>
+  </section>
+  <section>
+    <p>
+      Here's a list of images that uses a <code>simple-carousel</code>
+      Web Component for <em>progressive enhancement</em>, converting a
+      basic list of images into a carousel if JavaScript works.
+    </p>
+    <p>
+      The carousel behavior and CSS are very basic, the
+      goal is just to demonstrate using a Web Component as a wrapper
+      around a plain HTML structure that works well by itself, to 
+      provide a more sophisticated behavior.
+    </p>
+    <h2 id="adventures">Adventure images</h2>
+    <simple-carousel>
+      <ul>
+        <li>
+          <figure>
+            <img src="./images/adobestock-185234795.jpg">
+            <figcaption>Extreme skiing</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="./images/adobestock-241578158.jpg">
+            <figcaption>Climbing at sunset</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="./images/adobestock-151584995.jpg">
+            <figcaption>Atlantic coast</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="./images/adobestock-184591344.jpg">
+            <figcaption>At the ski resort</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="./images/adobestock-185324648.jpg">
+            <figcaption>Cycling in the red mountains</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="./images/adobestock-175749320.jpg">
+            <figcaption>Surfing fun</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </simple-carousel>
+    <p>
+      This text follows the list of images.
+    </p>
+  </section>
+  <script src="./simple-carousel.js"></script>
+</body>
+
+</html>

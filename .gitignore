@@ -106,3 +106,4 @@ dist
 playwright-report/
 _site/
 .sass-cache/
+.DS_Store

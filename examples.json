@@ -16,6 +16,13 @@
 }
 },
 {
+"path":"./examples/web-components/carousel/",
+"data": {
+  "name": "Carousel Web Component",
+  "tags": [ "webcomponent", "carousel" ]
+}
+},
+{
 "path":"./examples/web-components/expanding-list/",
 "data": {
   "name": "Expanding List Web Component",
