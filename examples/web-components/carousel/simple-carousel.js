@@ -72,9 +72,6 @@ class SimpleCarousel extends HTMLElement {
     buttons.innerHTML = buttonsHTML;
     this.#shadow.appendChild(buttons);
 
-    this.querySelectorAll('img').forEach(img => {
-      img.setAttribute('width', '600px');
-    });
     this.#shadow.appendChild(this.querySelector('ul'));
 
     this.#items = this.#shadow.querySelectorAll('li');
