@@ -77,24 +77,27 @@ class SimpleCarousel extends HTMLElement {
     this.#items = this.#shadow.querySelectorAll('li');
     this.#current = this.#items[0];
 
-    // Clicking anywhere in the carousel moves forward, cycling back to first image
-    // and prev button moves backwards stopping at first image
-    this.#shadow.querySelector('.next').addEventListener('click', () => { this.navigate(1) });
-    this.#shadow.querySelector('.prev').addEventListener('click', () => { this.navigate(-1) });
-
     // Provide an event-driven way to navigate 
     this.addEventListener('carousel-next', (e) => { 
-      this.navigate(1) 
+      this.#navigate(1) 
     });
     this.addEventListener('carousel-previous', (e) => { 
-      this.navigate(-1) 
+      this.#navigate(-1) 
+    });
+
+    // And connect next/prev buttons to that
+    this.#shadow.querySelector('.next').addEventListener('click', () => { 
+      this.dispatchEvent(new CustomEvent('carousel-next'))
+    });
+    this.#shadow.querySelector('.prev').addEventListener('click', () => { 
+      this.dispatchEvent(new CustomEvent('carousel-previous')) 
     });
 
     this.#index = 0;
-    this.navigate(0);
+    this.#navigate(0);
   }
 
-  navigate(increment=1) {
+  #navigate(increment=1) {
     this.#current.classList.remove('current');
     this.#index += increment;
     if(this.#index >= this.#items.length) {
