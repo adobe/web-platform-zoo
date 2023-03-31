@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  # also build on demand
+  workflow_dispatch:
 
 jobs:
   generate-index:
