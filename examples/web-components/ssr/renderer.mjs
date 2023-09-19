@@ -26,7 +26,7 @@ export async function render(html, scripts) {
   const page = await browser.newPage();
   if (scripts) {
     scripts.forEach(s => {
-      html = html.replace('<head>', `<head>\n<script>${s}</script>\n`);
+      html = html.replace('<head>', `<head>\n<script data-ssr-tmp='true'>${s}</script>\n`);
     });
   }
   page.on('console', msg => console.log(`*** puppeteer: ${msg.text()}`));
@@ -34,9 +34,9 @@ export async function render(html, scripts) {
     waitUntil: ["domcontentloaded"],
   });
 
-  // Cleanup scripts and HTML imports, not needed anymore
+  // Cleanup temporary scripts
   await page.evaluate(() => {
-    const elements = document.querySelectorAll('script, link[rel="import"]');
+    const elements = document.querySelectorAll('script[data-ssr-tmp=true]');
     elements.forEach(e => e.remove());
   });
 

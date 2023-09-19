@@ -1,17 +1,25 @@
 {
-  "name": "puppeteer-ssr",
+  "name": "webcomponents-ssr",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "nodemon --watch src --exec 'node server.mjs'"
   },
-  "keywords": [ "webcomponents", "ssr" ],
+  "keywords": [
+    "webcomponents",
+    "ssr"
+  ],
   "author": "Bertrand Delacretaz, Adobe",
   "license": "Apache-2.0",
   "dependencies": {
     "puppeteer": "^21.2.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
     "chai": "^4.3.7",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20"
   }
 }
