@@ -37,6 +37,13 @@
 }
 },
 {
+"path":"./examples/web-components/ssr/",
+"data": {
+  "name": "Server-side rendering of Web Components",
+  "tags": [ "webcomponent", "ssr" ]
+}
+},
+{
 "path":"./examples/web-components/todomvc/",
 "data": {
   "name": "TodoMVC using Web Components",

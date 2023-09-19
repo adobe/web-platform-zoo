@@ -1,0 +1,17 @@
+{
+  "name": "puppeteer-ssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [ "webcomponents", "ssr" ],
+  "author": "Bertrand Delacretaz, Adobe",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "puppeteer": "^21.2.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
