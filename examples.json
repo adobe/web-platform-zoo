@@ -2,6 +2,13 @@
 "WARNING":"auto-generated, do not edit!",
 "examples": [
 {
+"path":"./examples/performance/observer/",
+"data": {
+  "name": "PerformanceObserver Example",
+  "tags": [ "performance" ]
+}
+},
+{
 "path":"./examples/vanilla/vanilla-templating/",
 "data": {
   "name": "Vanilla templating",

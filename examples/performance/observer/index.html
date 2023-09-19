@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Performance Observer Example</title>
+
+  <link rel="stylesheet" href="../../../classless.css">
+  <style>
+    error {
+      color:red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="../../../">Home</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h1>Performance Observer Example</h1>
+    <p>
+      This is a very simple example of how to use the
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver">PerformanceObserver Web API</a>
+      to get various peformance measurements for the current page.
+    </p>
+    <p>
+      See the source code of this page for how this works.
+    </p>
+  </section>
+  <section>
+    <h2>Your browser</h2>
+    <p>
+      The available types of performance entries vary for each browser type.
+    </p>
+    <p>
+      On this browser, <code>PerformanceObserver.supportedEntryTypes</code> returns
+      <br>
+      <code><script>document.write(JSON.stringify(PerformanceObserver.supportedEntryTypes))</script></code>
+    </p>
+  </section>
+  <section id="observed">
+    <h2>Observed performance values</h2>
+    <p>See browser console for more details.</p>
+    <p>Events will be recorded as they happen, so far <b><span id="count">0</span></b> events have been recorded.</p>
+    <div>
+      <script>
+        var count = 0;
+        const observer = new PerformanceObserver((list, obj) => {
+          list.getEntries().forEach((entry) => {
+            console.log(entry);
+            const div = document.querySelector('#observed > div');
+            const pre = document.createElement('pre');
+            const { name, entryType, startTime, duration } = entry;
+            pre.textContent = JSON.stringify({name, entryType, startTime, duration}, null, 2);
+            div.appendChild(pre);
+            document.querySelector('#count').textContent = ++count;
+          });
+        });
+        observer.observe({ entryTypes: PerformanceObserver.supportedEntryTypes });
+      </script>
+    </div>
+  </section>
+</body>
+
+</html>
