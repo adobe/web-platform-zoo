@@ -20,6 +20,7 @@ const options = {
   'devtools': true
 }
 
+console.log('Initializing puppeteer');
 const browser = await puppeteer.launch(options);
 
 export async function render(html, scripts) {
@@ -29,7 +30,15 @@ export async function render(html, scripts) {
       html = html.replace('<head>', `<head>\n<script data-ssr-tmp='true'>${s}</script>\n`);
     });
   }
-  page.on('console', msg => console.log(`*** puppeteer: ${msg.text()}`));
+
+  // TODO block some requests to increase performance?
+  page.on('request', request => {
+    console.log('puppeteer request', request._url);
+    request.continue;
+  });
+
+  page.on('console', msg => console.log('puppeteer log', msg.text()));
+
   await page.setContent(html, {
     waitUntil: ["domcontentloaded"],
   });
