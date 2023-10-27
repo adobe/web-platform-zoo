@@ -1,0 +1,37 @@
+{
+  "BOT01": {
+    "name": "Bottle 01",
+    "description": "A fantastic bottle",
+    "category": "containers"
+  },
+  "BOT02": {
+    "name": "Bottle 02",
+    "description": "An even better bottle",
+    "category": "containers"
+  },
+  "BOT03": {
+    "name": "Bottle 03",
+    "description": "The third bottle",
+    "category": "containers"
+  },
+  "KNIFE01": {
+    "name": "First knife",
+    "description": "A small pocket knife",
+    "category": "knife"
+  },
+  "KNIFE02": {
+    "name": "Larger knife",
+    "description": "A slightly larger pocket knife",
+    "category": "knife"
+  },
+  "KNIFE03": {
+    "name": "Wooden handle bread knife",
+    "description": "A super nice bread knife, with wooden handle",
+    "category": "knife"
+  },
+  "KNIFE04": {
+    "name": "Marine knife",
+    "description": "A safety knife for marine usages",
+    "category": "knife"
+  }
+}
