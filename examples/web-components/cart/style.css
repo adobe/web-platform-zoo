@@ -1,0 +1,22 @@
+:root {
+  --product-card-height: 200px;
+  --width: 100%;
+
+  --cart-product-button-bg: beige;
+}
+
+body {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+#products {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+li:not(:last-child) {
+  margin-bottom: 0;
+}

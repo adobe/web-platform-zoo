@@ -30,6 +30,13 @@
 }
 },
 {
+"path":"./examples/web-components/cart/",
+"data": {
+  "name": "Shopping Cart Web Components",
+  "tags": [ "webcomponent", "shoppingcart" ]
+}
+},
+{
 "path":"./examples/web-components/expanding-list/",
 "data": {
   "name": "Expanding List Web Component",

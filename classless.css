@@ -74,7 +74,7 @@ li:not(:last-child), dd:not(:last-child) { margin-bottom: 0.5rem; }
 dt { font-weight: bold; }
 
 /* headings */
-h1, h2, h3, h4, h5 { margin: 1.5em 0 .5rem; font: var(--font-h); line-height: 1.2em; clear: both; }
+h1, h2, h3, h4, h5 { font: var(--font-h); }
 h1+h2, h2+h3, h3+h4, h4+h5 { margin-top: .5em; padding-top: 0; }  /* non-clashing headings */
 h1 { font-size: 2.2em; font-weight: 300; }
 h2 { font-size: 2.0em; font-weight: 300; font-variant: small-caps; }
@@ -270,16 +270,6 @@ article > h2:first-of-type + p:first-letter, .lettrine {
 	padding: 0.1em 0.1em 0 0;
 	line-height: 0.68em;
 	color: var(--cemph);
-}
-
-/* ornaments */
-section:after {
-	display: block;
-	margin: 1em 0;
-	color: var(--cmed);
-	text-align: center;
-	font-size: 1.5em;
-	content: var(--ornament);
 }
 
 /* side menu (aside is not intended for use in a paragraph!) */
