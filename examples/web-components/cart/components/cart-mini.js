@@ -12,14 +12,30 @@ governing permissions and limitations under the License.
 import { html, render } from '../scripts/preact-standalone.js';
 
 class CartMini extends HTMLElement {
-  connectedCallback() {
-    this._render();
-    window.addEventListener('cart:add-product', e => console.log('cart:add-product', e.detail));
+  constructor() {
+    super();
+    this.attachShadow({mode:'open'});
   }
 
-  _render() {
-    this.innerHTML = '';
-    render(html`<p>This is <em>${this.constructor.name}</em></p>`, this.parentElement, this);
+  connectedCallback() {
+    render(html`
+      <div>
+        <b><span id="nProducts">0</span></b> products
+        in cart,
+        total <b><span id="nItems">0</span></b> items,
+        total price <b>USD <span id="totalPrice">0</span></b>
+      </div>`, this.shadowRoot);
+    this.nProducts = this.shadowRoot.querySelector("#nProducts");
+    this.nItems = this.shadowRoot.querySelector("#nItems");
+    this.totalPrice = this.shadowRoot.querySelector("#totalPrice");
+    window.addEventListener('cart:changed', this._cartChanged.bind(this));
+  }
+
+  _cartChanged() {
+    const cart = window.cart.get('cart').cart;
+    this.nProducts.textContent = cart.nProducts;
+    this.nItems.textContent = cart.nItems;
+    this.totalPrice.textContent = cart.totalPrice;
   }
 }
 

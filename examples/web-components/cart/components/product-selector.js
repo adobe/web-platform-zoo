@@ -13,12 +13,7 @@ import { html, render } from '../scripts/preact-standalone.js';
 
 class ProductSelector extends HTMLElement {
   connectedCallback() {
-    this._render();
-  }
-
-  _render() {
-    this.innerHTML = '';
-    render(html`<p>This is <em>${this.constructor.name}</em></p>`, this.parentElement, this);
+    render(html`<p>This is <em>${this.constructor.name}</em>, later this will allow for selecting a subset of the products displayed below</p>`, this.parentElement, this);
   }
 }
 

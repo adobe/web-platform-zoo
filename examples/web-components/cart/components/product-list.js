@@ -10,25 +10,38 @@ governing permissions and limitations under the License.
 */
 
 import { html, render } from '../scripts/preact-standalone.js';
-import ProductDB from '../scripts/product-db.js';
+import '../scripts/cart-logic.js';
 
 class ProductList extends HTMLElement {
-  static products = new ProductDB();
+  static products = window.cart.get();
 
-  connectedCallback() {
-    this._render();
+  static style = html`
+    <style type='text/css'>
+    ul {
+      list-style-type:none;
+      display: flex;
+      flex-flow: row wrap;
+    }
+    </style>
+  `;
+
+  constructor() {
+    super();
+    this.attachShadow({mode:'open'});
   }
 
-  _render() {
+
+  connectedCallback() {
+    render(ProductList.style, this.shadowRoot);
     const ul = document.createElement('ul');
-    const list = ProductList.products.products();
+    const list = ProductList.products.products;
     for(let k of Object.keys(list)) {
       const p = list[k];
       const li = document.createElement('li');
       ul.appendChild(li);
-      render(html`<li><cart-product-button product='${p.id}'></cart-product-button> :: <b>${p.name}</b> - <em>${p.description}</em></li>`, li);
+      render(html`<li><product-card productID="${p.id}"></product-card></li>`, li);
     }
-    this.replaceChildren(ul);
+    this.shadowRoot.append(ul);
   }
 }
 
