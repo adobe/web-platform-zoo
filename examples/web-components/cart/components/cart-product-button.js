@@ -9,11 +9,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, render } from '../scripts/preact-standalone.js';
 import '../scripts/cart-logic.js';
 
 class CartProductButton extends HTMLElement {
-   static style = html`
+  static template = document.createElement('template');
+  static {
+   CartProductButton.template.innerHTML =  `
     <style type='text/css'>
     button {
       background-color: var(--cart-product-button-bg, orange);
@@ -25,39 +26,39 @@ class CartProductButton extends HTMLElement {
       font-size: var(--cart-product-button-font-size, 100%);
     }
     </style>
+    <button aria-label='increase count' tabindex='-1' id='1'>+</button>
+    <input 
+      type='text'
+      size='4'
+      role='slider'
+      aria-valuemin='0'
+    ></input>
+    <button aria-label='decrease count' tabindex='-1' id='-1'>-</button>
   `;
+  }
 
   constructor() {
     super();
     this.count = 0;
-    this.attachShadow({mode:'open'});
+    this._shadowRoot = this.attachShadow({mode:'closed'});
   }
 
   connectedCallback() {
+    this._shadowRoot.append(CartProductButton.template.content.cloneNode(true));
+
     const pidAttr = this.getAttribute('productID');
     this.product = window.cart.get(pidAttr);
     if(!this.product) {
-      render(html`<div class='error'>Product not found: ${pidAttr}</div>`, this.shadowRoot);
-      return;
+      throw new Error(`Product not found: ${pidAttr}</div>`);
     }
-    render(CartProductButton.style, this.shadowRoot);
-    const div = document.createElement('div');
-    render(html`
-      <button aria-label='increase count' tabindex='-1' id='1'>+</button>
-      <input 
-        type='text'
-        size='4'
-        value='${this.count}'
-        role='slider'
-        aria-valuemin='0'
-        aria-label='${this.product.name}, quantity in cart, ${this.product.price} dollars per unit'
-      ></input>
-      <button aria-label='decrease count' tabindex='-1' id='-1'>-</button>
-      `, 
-      div);
-    this.shadowRoot.append(div);
-    this.shadowRoot.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.id)));
-    this.input = this.shadowRoot.querySelector('input');
+    this._shadowRoot.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.id)));
+    this.input = this._shadowRoot.querySelector('input');
+    this.input.setAttribute('aria-label', `${this.product.name}, quantity in cart`);
+    this.inCart = window.cart.list('cart').products[this.product.id];
+    if(this.inCart) {
+      this.count = this.inCart.count;
+    }
+    this.input.value = this.count;
     this.input.addEventListener('keyup', this._keypressed.bind(this));
   }
 

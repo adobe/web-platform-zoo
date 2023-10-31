@@ -24,7 +24,7 @@ class CartMini extends HTMLElement {
         <b><span id="nProducts">0</span></b> products
         in cart,
         total <b><span id="nItems">0</span></b> items,
-        total price <b>USD <span id="totalPrice">0</span></b>
+        total price <b>USD <span id="totalPrice">0</span></b> <slot></slot>
       </div>`, this.shadowRoot);
     this.nProducts = this.shadowRoot.querySelector("#nProducts");
     this.nItems = this.shadowRoot.querySelector("#nItems");

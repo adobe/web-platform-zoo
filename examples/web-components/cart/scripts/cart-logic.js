@@ -10,11 +10,11 @@ governing permissions and limitations under the License.
 */
 
 class CartLogic {
-  static emptyCart = { totalPrice: 0, nProducts:0, nItems: 0 };
 
-  constructor(products) {
+  constructor(storageKey, products) {
+    this._storageKey = storageKey;
     this._products = { products };
-    this._cart = { products: {}, cart: CartLogic.emptyCart };
+    this._cart = this._loadCart();
   }
 
   list(query) {
@@ -29,6 +29,19 @@ class CartLogic {
     return this._products.products[id];
   }
 
+  _loadCart() {
+    var result = { products: {}, cart: { totalPrice: 0, nProducts:0, nItems: 0 }};
+    const json = window.localStorage.getItem(this._storageKey);
+    if(json) {
+      try {
+        result = JSON.parse(json);
+      } catch(e) {
+        console.log(`CartLogic: error parsing stored cart, using empty cart: ${json}`);
+      }
+    }
+    return result;
+  }
+
   _setCount(e) {
     // Update cart
     const product = this._products.products[e.productID];
@@ -37,7 +50,7 @@ class CartLogic {
     } else {
       this._cart.products[e.productID] = {
         count: e.count,
-        price: product.price
+        ...product
       }
     }
 
@@ -52,6 +65,9 @@ class CartLogic {
       cart.nItems += products[k].count;
     });
     cart.nProducts = Object.keys(products).length;
+
+    // Store cart data
+    window.localStorage.setItem(this._storageKey, JSON.stringify(this._cart));
 
     // And let others know
     window.dispatchEvent(new CustomEvent('cart:changed'));
@@ -83,6 +99,6 @@ if (!window.cart) {
     }
     return products;
   }
-  window.cart = new CartLogic(await getProducts());
+  window.cart = new CartLogic('wpzoo-example-shopping-cart', await getProducts());
   window.addEventListener('cart:setCount', e => window.cart._setCount(e.detail));
 }

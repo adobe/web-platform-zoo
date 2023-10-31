@@ -40,14 +40,15 @@ class ProductCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode:'open'});
+    this.productID = this.getAttribute('productID');
+    window.addEventListener('cart:changed', this._cartChanged.bind(this));
   }
 
   connectedCallback() {
     render(ProductCard.style, this.shadowRoot);
-    const pidAttr = this.getAttribute('productID');
-    const p = window.cart.get(pidAttr);
+    const p = window.cart.get(this.productID);
     if(!p) {
-      render(html`<div class='error'>Product not found: ${pidAttr}</div>`, this.shadowRoot);
+      render(html`<div class='error'>Product not found: ${this.productID}</div>`, this.shadowRoot);
       return;
     }
     const article = document.createElement('article');
@@ -56,12 +57,24 @@ class ProductCard extends HTMLElement {
       <img src='images/${p.image}' alt='${p.name}'></img>
       <div id='text'>
         <h3>${p.name}</h3>
+        <p id='price'></p>
         <cart-product-button productID='${p.id}'></cart-product-button>
-        <p>USD ${p.price}</p>
+        <cart-product-status productID='${p.id}'></cart-product-status>
         <p tabindex='-1' id='product-description-${p.id}' class='description'><em>${p.description}</em></p>
       </div>`,
       article);
     this.shadowRoot.append(article);
+    this.price = this.shadowRoot.querySelector('#price');
+    this._cartChanged();
+  }
+
+  _cartChanged() {
+    const p = window.cart.list().products[this.productID];
+    const inCart = window.cart.list('cart').products[this.productID];
+    if(p && this.price) {
+      const price = inCart ? `, total USD ${p.price * inCart.count}` : '';
+      this.price.textContent = `USD ${p.price} per unit${price}`;
+    }
   }
 }
 
