@@ -30,7 +30,7 @@ class ProductCard extends HTMLElement {
         padding: 1em;
         width: calc(2 * var(--product-card-height, 500px));
       }
-      #description {
+      .description {
         max-height: 3em;
         overflow-y: auto;
       }
@@ -40,27 +40,40 @@ class ProductCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode:'open'});
+    this.productID = this.getAttribute('productID');
+    window.addEventListener('cart:changed', this._cartChanged.bind(this));
   }
 
   connectedCallback() {
     render(ProductCard.style, this.shadowRoot);
-    const id = this.getAttribute('productID');
-    const p = window.cart.get().products[id];
-    if(!id) {
-      render(html`<div class='error'>Product not found: ${id}</div>`, this.shadowRoot);
+    const p = window.cart.get(this.productID);
+    if(!p) {
+      render(html`<div class='error'>Product not found: ${this.productID}</div>`, this.shadowRoot);
       return;
     }
     const article = document.createElement('article');
+    article.setAttribute('aria-labelledby', 'name');
     render(html`
-      <img src='images/${p.image}'></img>
+      <img src='images/${p.image}' alt='${p.name}'></img>
       <div id='text'>
-        <h3>${p.name}</h3>
-        <cart-product-button product='${p.id}'></cart-product-button>
-        <p>USD ${p.price}</p>
-        <p id='description'><em>${p.description}</em></p>
+        <h3 id='name'>${p.name}</h3>
+        <p id='price'></p>
+        <cart-product-button productID='${p.id}'></cart-product-button>
+        <p tabindex='-1' id='product-description-${p.id}' class='description'><em>${p.description}</em></p>
       </div>`,
       article);
     this.shadowRoot.append(article);
+    this.price = this.shadowRoot.querySelector('#price');
+    this._cartChanged();
+  }
+
+  _cartChanged() {
+    const p = window.cart.list().products[this.productID];
+    const inCart = window.cart.list('cart').products[this.productID];
+    if(p && this.price) {
+      const price = inCart ? `, total USD ${p.price * inCart.count}` : '';
+      this.price.textContent = `USD ${p.price} per unit${price}`;
+    }
   }
 }
 

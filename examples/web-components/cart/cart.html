@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shopping Cart Contents</title>
+
+  <link rel="stylesheet" href="../../../classless.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <script type="module" src="components/cart-product-button.js"></script>
+  <script type="module" src="components/cart-mini.js"></script>
+  <script type="module" src="components/cart-status.js"></script>
+  <script type="module" src="components/product-list.js"></script>
+  <script type="module" src="components/product-card.js"></script>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="../../../">Home</a></li>
+    </ul>
+  </nav>
+  <h1>Shopping Cart Contents</h1>
+  <main>
+    <cart-mini> - <a href="./">Shopping page</a></cart-mini>
+    <product-list query='cart' aria-label="Products list" aria-role="list"></product-list>
+  </main>
+  <cart-status></cart-status>
+</body>
+
+</html>

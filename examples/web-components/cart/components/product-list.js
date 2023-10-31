@@ -13,7 +13,6 @@ import { html, render } from '../scripts/preact-standalone.js';
 import '../scripts/cart-logic.js';
 
 class ProductList extends HTMLElement {
-  static products = window.cart.get();
 
   static style = html`
     <style type='text/css'>
@@ -28,18 +27,19 @@ class ProductList extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({mode:'open'});
+    this.products = window.cart.list(this.getAttribute('query'));
   }
 
 
   connectedCallback() {
     render(ProductList.style, this.shadowRoot);
     const ul = document.createElement('ul');
-    const list = ProductList.products.products;
+    const list = this.products.products;
     for(let k of Object.keys(list)) {
       const p = list[k];
       const li = document.createElement('li');
       ul.appendChild(li);
-      render(html`<li><product-card productID="${p.id}"></product-card></li>`, li);
+      render(html`<li><product-card query='${this.getAttribute('query')}' productID='${p.id}'></product-card></li>`, li);
     }
     this.shadowRoot.append(ul);
   }

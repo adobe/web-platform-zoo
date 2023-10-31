@@ -10,6 +10,7 @@ governing permissions and limitations under the License.
 */
 
 import { html, render } from '../scripts/preact-standalone.js';
+import '../scripts/cart-logic.js';
 
 class CartMini extends HTMLElement {
   constructor() {
@@ -23,16 +24,30 @@ class CartMini extends HTMLElement {
         <b><span id="nProducts">0</span></b> products
         in cart,
         total <b><span id="nItems">0</span></b> items,
-        total price <b>USD <span id="totalPrice">0</span></b>
+        total price <b>USD <span id="totalPrice">0</span></b> <slot></slot>
       </div>`, this.shadowRoot);
     this.nProducts = this.shadowRoot.querySelector("#nProducts");
     this.nItems = this.shadowRoot.querySelector("#nItems");
     this.totalPrice = this.shadowRoot.querySelector("#totalPrice");
     window.addEventListener('cart:changed', this._cartChanged.bind(this));
+    const a = this.querySelector('a');
+    if(a) {
+      a.addEventListener('focus', this._setStatus.bind(this));
+    }
+    this._cartChanged();
+  }
+
+  _setStatus() {
+    const cart = window.cart.list('cart').cart;
+    var msg = 'no products in cart';
+    if(cart.nProducts > 0) {
+      msg = `${cart.nProducts} products in cart, total ${cart.nItems} items, ${cart.totalPrice} dollars`;
+    }
+    window.dispatchEvent(new CustomEvent('cart:status', { detail: msg }));
   }
 
   _cartChanged() {
-    const cart = window.cart.get('cart').cart;
+    const cart = window.cart.list('cart').cart;
     this.nProducts.textContent = cart.nProducts;
     this.nItems.textContent = cart.nItems;
     this.totalPrice.textContent = cart.totalPrice;

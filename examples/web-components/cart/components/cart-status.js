@@ -9,12 +9,17 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-import { html, render } from '../scripts/preact-standalone.js';
+import '../scripts/cart-logic.js';
 
-class ProductSelector extends HTMLElement {
+class CartStatus extends HTMLElement {
   connectedCallback() {
-    render(html`<p>This is <em>${this.constructor.name}</em>, later this will allow for selecting a subset of the products displayed below</p>`, this.parentElement, this);
+    this.setAttribute('role', 'status');
+    this.setAttribute('style', 'opacity:0');
+    this.lastChange = Date.now();
+    this.status = '';
+
+    window.addEventListener('cart:status', e => this.textContent = e.detail);
   }
 }
 
-customElements.define('product-selector', ProductSelector);
+customElements.define('cart-status', CartStatus);
