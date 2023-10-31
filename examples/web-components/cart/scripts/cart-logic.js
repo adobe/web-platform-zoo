@@ -17,12 +17,16 @@ class CartLogic {
     this._cart = { products: {}, cart: CartLogic.emptyCart };
   }
 
-  get(query) {
+  list(query) {
     if(query === 'cart') {
       return this._cart;
     } else {
       return this._products;
     }
+  }
+
+  get(id) {
+    return this._products.products[id];
   }
 
   _setCount(e) {
@@ -55,16 +59,27 @@ class CartLogic {
 }
 
 if (!window.cart) {
-  const getProducts = async () => {
-    const url = `${import.meta.url}/../../data/products.json`;
+  const getJson = async (filename) => {
+    const url = `${import.meta.url}${filename}`;
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Error retrieving ${url}`);
     }
-    const products = JSON.parse(await response.text());
+    return JSON.parse(await response.text());
+  }
+
+  const getProducts = async () => {
+    const products = await getJson('/../../data/products.json');
+    const descriptions = await getJson('/../../data/descriptions.json');
 
     for (let k of Object.keys(products)) {
-      products[k].id = k;
+      const product = products[k];
+      product.id = k;
+      const desc = descriptions[product.image];
+      if(desc) {
+        product.name = desc.name;
+        product.description = desc.description;
+      }
     }
     return products;
   }

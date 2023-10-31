@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./style.css">
 
   <script type="module" src="components/cart-mini.js"></script>
+  <script type="module" src="components/cart-status.js"></script>
   <script type="module" src="components/cart-product-button.js"></script>
   <script type="module" src="components/product-selector.js"></script>
   <script type="module" src="components/product-list.js"></script>
@@ -41,11 +42,12 @@
   <main>
     <h2>Products</h2>
     <cart-mini></cart-mini>
-    <product-selector></product-selector>
+    <product-selector aria-label="Products list" aria-role="list"></product-selector>
   </main>
   <section id="products">
     <product-list></product-list>
   </section>
+  <cart-status></cart-status>
 </body>
 
 </html>

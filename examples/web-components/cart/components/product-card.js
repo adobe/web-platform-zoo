@@ -30,7 +30,7 @@ class ProductCard extends HTMLElement {
         padding: 1em;
         width: calc(2 * var(--product-card-height, 500px));
       }
-      #description {
+      .description {
         max-height: 3em;
         overflow-y: auto;
       }
@@ -44,20 +44,21 @@ class ProductCard extends HTMLElement {
 
   connectedCallback() {
     render(ProductCard.style, this.shadowRoot);
-    const id = this.getAttribute('productID');
-    const p = window.cart.get().products[id];
-    if(!id) {
-      render(html`<div class='error'>Product not found: ${id}</div>`, this.shadowRoot);
+    const pidAttr = this.getAttribute('productID');
+    const p = window.cart.get(pidAttr);
+    if(!p) {
+      render(html`<div class='error'>Product not found: ${pidAttr}</div>`, this.shadowRoot);
       return;
     }
     const article = document.createElement('article');
+    article.setAttribute('aria-label', p.name);
     render(html`
-      <img src='images/${p.image}'></img>
+      <img src='images/${p.image}' alt='${p.name}'></img>
       <div id='text'>
         <h3>${p.name}</h3>
-        <cart-product-button product='${p.id}'></cart-product-button>
+        <cart-product-button productID='${p.id}'></cart-product-button>
         <p>USD ${p.price}</p>
-        <p id='description'><em>${p.description}</em></p>
+        <p tabindex='-1' id='product-description-${p.id}' class='description'><em>${p.description}</em></p>
       </div>`,
       article);
     this.shadowRoot.append(article);

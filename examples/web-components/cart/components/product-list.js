@@ -13,7 +13,7 @@ import { html, render } from '../scripts/preact-standalone.js';
 import '../scripts/cart-logic.js';
 
 class ProductList extends HTMLElement {
-  static products = window.cart.get();
+  static products = window.cart.list();
 
   static style = html`
     <style type='text/css'>

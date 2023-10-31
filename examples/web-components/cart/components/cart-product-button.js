@@ -10,6 +10,7 @@ governing permissions and limitations under the License.
 */
 
 import { html, render } from '../scripts/preact-standalone.js';
+import '../scripts/cart-logic.js';
 
 class CartProductButton extends HTMLElement {
    static style = html`
@@ -33,29 +34,51 @@ class CartProductButton extends HTMLElement {
   }
 
   connectedCallback() {
+    const pidAttr = this.getAttribute('productID');
+    this.product = window.cart.get(pidAttr);
+    if(!this.product) {
+      render(html`<div class='error'>Product not found: ${pidAttr}</div>`, this.shadowRoot);
+      return;
+    }
     render(CartProductButton.style, this.shadowRoot);
     const div = document.createElement('div');
     render(html`
-      <button id='inc'>+</button>
-      <input type='text' size='4' value='${this.count}'></input>
-      <button id='dec'>-</button>
-      <button id='clear'>=0</button>`, 
+      <button aria-label='increase count' tabindex='-1' id='1'>+</button>
+      <input 
+        type='text'
+        size='4'
+        value='${this.count}'
+        role='slider'
+        aria-valuemin='0'
+        aria-label='${this.product.name}, quantity in cart, ${this.product.price} dollars per unit'
+      ></input>
+      <button aria-label='decrease count' tabindex='-1' id='-1'>-</button>
+      `, 
       div);
     this.shadowRoot.append(div);
-    this.productID = this.getAttribute('product');
     this.shadowRoot.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.id)));
     this.input = this.shadowRoot.querySelector('input');
-    this.input.addEventListener('keyup', this._setCount.bind(this, 'value'));
+    this.input.addEventListener('keyup', this._keypressed.bind(this));
+  }
+
+  _keypressed(e) {
+    var source = 'value';
+    if(e.key == 'ArrowUp') {
+      source = '1';
+    } else if(e.key == 'PageUp') {
+      source = 10;
+    } else if(e.key == 'ArrowDown') {
+      source = '-1';
+    } else if(e.key == 'PageDown') {
+      source = -10;
+    }
+    this._setCount(source);
   }
 
   _setCount(source) {
       const oldCount = this.count;
-      if(source === 'inc') {
-        this.count++;
-      } else if(source === 'dec') {
-        this.count--;
-      } else if(source === 'clear') {
-        this.count = 0;
+      if(!isNaN(source)) {
+        this.count += Number(source);
       } else {
         const v = Number(this.input.value);
         if(!isNaN(v)) {
@@ -64,10 +87,11 @@ class CartProductButton extends HTMLElement {
       }
       this.count = Math.floor(Math.max(0, this.count));
       if(this.count != oldCount) {
-        const detail = { productID:this.productID, count:this.count};
+        const detail = { productID:this.product.id, count:this.count};
         window.dispatchEvent(new CustomEvent('cart:setCount', { detail }));
       }
       this.input.value = this.count;
+      this.input.setAttribute('aria-valuenow', `${this.count}`);
   }
 }
 

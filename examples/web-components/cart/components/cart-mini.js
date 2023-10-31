@@ -10,6 +10,7 @@ governing permissions and limitations under the License.
 */
 
 import { html, render } from '../scripts/preact-standalone.js';
+import '../scripts/cart-logic.js';
 
 class CartMini extends HTMLElement {
   constructor() {
@@ -29,13 +30,15 @@ class CartMini extends HTMLElement {
     this.nItems = this.shadowRoot.querySelector("#nItems");
     this.totalPrice = this.shadowRoot.querySelector("#totalPrice");
     window.addEventListener('cart:changed', this._cartChanged.bind(this));
+    this._cartChanged();
   }
 
   _cartChanged() {
-    const cart = window.cart.get('cart').cart;
+    const cart = window.cart.list('cart').cart;
     this.nProducts.textContent = cart.nProducts;
     this.nItems.textContent = cart.nItems;
     this.totalPrice.textContent = cart.totalPrice;
+    this.lastChange = Date.now();
   }
 }
 
