@@ -52,14 +52,13 @@ class ProductCard extends HTMLElement {
       return;
     }
     const article = document.createElement('article');
-    article.setAttribute('aria-label', p.name);
+    article.setAttribute('aria-labelledby', 'name');
     render(html`
       <img src='images/${p.image}' alt='${p.name}'></img>
       <div id='text'>
-        <h3>${p.name}</h3>
+        <h3 id='name'>${p.name}</h3>
         <p id='price'></p>
         <cart-product-button productID='${p.id}'></cart-product-button>
-        <cart-product-status productID='${p.id}'></cart-product-status>
         <p tabindex='-1' id='product-description-${p.id}' class='description'><em>${p.description}</em></p>
       </div>`,
       article);

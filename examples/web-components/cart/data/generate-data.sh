@@ -1,6 +1,6 @@
 echo "{"
 first=1
-ls ../images/*.jpg | while read f
+ls ../images/*.jpg | sort -R | while read f
 do
   if [[ $first -ne 1 ]]
   then

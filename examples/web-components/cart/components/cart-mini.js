@@ -30,7 +30,20 @@ class CartMini extends HTMLElement {
     this.nItems = this.shadowRoot.querySelector("#nItems");
     this.totalPrice = this.shadowRoot.querySelector("#totalPrice");
     window.addEventListener('cart:changed', this._cartChanged.bind(this));
+    const a = this.querySelector('a');
+    if(a) {
+      a.addEventListener('focus', this._setStatus.bind(this));
+    }
     this._cartChanged();
+  }
+
+  _setStatus() {
+    const cart = window.cart.list('cart').cart;
+    var msg = 'no products in cart';
+    if(cart.nProducts > 0) {
+      msg = `${cart.nProducts} products in cart, total ${cart.nItems} items, ${cart.totalPrice} dollars`;
+    }
+    window.dispatchEvent(new CustomEvent('cart:status', { detail: msg }));
   }
 
   _cartChanged() {
@@ -38,7 +51,6 @@ class CartMini extends HTMLElement {
     this.nProducts.textContent = cart.nProducts;
     this.nItems.textContent = cart.nItems;
     this.totalPrice.textContent = cart.totalPrice;
-    this.lastChange = Date.now();
   }
 }
 

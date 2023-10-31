@@ -18,31 +18,7 @@ class CartStatus extends HTMLElement {
     this.lastChange = Date.now();
     this.status = '';
 
-    window.addEventListener('cart:changed', this._cartChanged.bind(this));
-    window.addEventListener('cart:setStatus', this._setStatus.bind(this));
-
-    this._everySecond();
-  }
-
-  _cartChanged() {
-    this.lastChange = Date.now();
-  }
-
-  _setStatus() {
-    this.textContent = this.status;
-    this.lastChange = Date.now();
-  }
-
-  _everySecond() {
-    const cart = window.cart.list('cart').cart;
-    const newStatus = `${cart.nProducts} products in cart, total ${cart.nItems} items, ${cart.totalPrice} dollars`;
-    const delta = Date.now() - this.lastChange;
-    const minWaitBeforeStatus = 2000;
-    if(delta >= minWaitBeforeStatus && newStatus != this.statusText) {
-      this.status = newStatus;
-      window.dispatchEvent(new CustomEvent('cart:setStatus'));
-    }
-    setTimeout(() => requestIdleCallback(this._everySecond.bind(this)), 1000);
+    window.addEventListener('cart:status', e => this.textContent = e.detail);
   }
 }
 

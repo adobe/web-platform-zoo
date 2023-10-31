@@ -26,40 +26,46 @@ class CartProductButton extends HTMLElement {
       font-size: var(--cart-product-button-font-size, 100%);
     }
     </style>
-    <button aria-label='increase count' tabindex='-1' id='1'>+</button>
-    <input 
-      type='text'
-      size='4'
-      role='slider'
-      aria-valuemin='0'
-    ></input>
-    <button aria-label='decrease count' tabindex='-1' id='-1'>-</button>
+    <div role='slider' aria-label='in cart'>
+      <button aria-hidden='true' tabindex='-1' id='1'>+</button>
+      <input
+        aria-hidden='true'
+        type='text'
+        size='4'
+      ></input>
+      <button aria-hidden='true' tabindex='-1' id='-1'>-</button>
+    </div>
   `;
   }
 
   constructor() {
     super();
     this.count = 0;
-    this._shadowRoot = this.attachShadow({mode:'closed'});
+    this.attachShadow({mode:'open'});
   }
 
   connectedCallback() {
-    this._shadowRoot.append(CartProductButton.template.content.cloneNode(true));
+    this.shadowRoot.append(CartProductButton.template.content.cloneNode(true));
 
     const pidAttr = this.getAttribute('productID');
     this.product = window.cart.get(pidAttr);
     if(!this.product) {
       throw new Error(`Product not found: ${pidAttr}</div>`);
     }
-    this._shadowRoot.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.id)));
-    this.input = this._shadowRoot.querySelector('input');
-    this.input.setAttribute('aria-label', `${this.product.name}, quantity in cart`);
+    this.shadowRoot.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.id)));
+    this.slider = this.shadowRoot.querySelector('div[role=slider]');
+    this.input = this.shadowRoot.querySelector('input');
     this.inCart = window.cart.list('cart').products[this.product.id];
     if(this.inCart) {
       this.count = this.inCart.count;
     }
     this.input.value = this.count;
     this.input.addEventListener('keyup', this._keypressed.bind(this));
+    this.input.addEventListener('focus', this._focused.bind(this));
+  }
+
+  _focused() {
+    window.dispatchEvent(new CustomEvent('cart:status', { detail: `${this.product.name} selected` }));
   }
 
   _keypressed(e) {
@@ -92,7 +98,8 @@ class CartProductButton extends HTMLElement {
         window.dispatchEvent(new CustomEvent('cart:setCount', { detail }));
       }
       this.input.value = this.count;
-      this.input.setAttribute('aria-valuenow', `${this.count}`);
+
+      this.slider.setAttribute('aria-valuenow', `${this.count}`);
   }
 }
 
