@@ -70,11 +70,11 @@ class CartProductButton extends HTMLElement {
 
   _keypressed(e) {
     var source = 'value';
-    if(e.key == 'ArrowUp') {
+    if(e.key == 'ArrowUp' || e.key == '+') {
       source = '1';
     } else if(e.key == 'PageUp') {
       source = 10;
-    } else if(e.key == 'ArrowDown') {
+    } else if(e.key == 'ArrowDown' || e.key == '-') {
       source = '-1';
     } else if(e.key == 'PageDown') {
       source = -10;
