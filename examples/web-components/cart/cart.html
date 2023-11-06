@@ -7,14 +7,11 @@
 
   <title>Shopping Cart Contents</title>
 
-  <link rel="stylesheet" href="../../../classless.css">
+  <link rel="stylesheet" href="../../../DISABLED-classless.css">
   <link rel="stylesheet" href="./style.css">
 
-  <script type="module" src="components/cart-product-button.js"></script>
-  <script type="module" src="components/cart-mini.js"></script>
-  <script type="module" src="components/cart-status.js"></script>
   <script type="module" src="components/product-list.js"></script>
-  <script type="module" src="components/product-card.js"></script>
+  <script type="module" src="components/inc-dec-input.js"></script>
 </head>
 
 <body>
@@ -23,11 +20,15 @@
       <li><a href="../../../">Home</a></li>
     </ul>
   </nav>
-  <h1>Shopping Cart Contents</h1>
   <main>
-    <cart-mini> - <a href="./">Shopping page</a></cart-mini>
-    <product-list query='cart' aria-label="Products list" aria-role="list"></product-list>
+    <h1>Shopping Cart Contents</h1>
+    <h2>Products</h2>
+    <cart-status itemscope><span itemprop="total.products"></span> products in cart, total <span itemprop="total.items"></span> items, total price USD <span itemprop="total.price"></span></cart-status>
+    <a href="./">Shopping page</a>
   </main>
+  <section id="products">
+    <product-list aria-label="Products list" aria-role="list" class="cart" query="cart"></product-list>
+  </section>
   <cart-status></cart-status>
 </body>
 

@@ -1,8 +1,9 @@
 :root {
-  --product-card-height: 200px;
+  --product-img-height: 200px;
   --width: 100%;
 
   --cart-product-button-bg: beige;
+  --cart-product-button-font-size: 80%;
 }
 
 body {
@@ -19,4 +20,39 @@ body {
 
 li:not(:last-child) {
   margin-bottom: 0;
+}
+
+ul .product-list {
+  list-style-type:none;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.product img {
+  width: var(--product-img-height, 50px);
+  height: var(--product-img-height, 50px);
+}
+
+.product .description {
+  font-style: italic;
+}
+
+product-list {
+  padding-top: 1em;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+product-list article {
+  padding-left: 1em;
+  width: var(--product-img-height, 50px);
+  padding-bottom: 1em;
+}
+
+product-list article * {
+  margin: 0.1em;
+}
+
+product-list article .price {
+  font-size: 80%;
 }

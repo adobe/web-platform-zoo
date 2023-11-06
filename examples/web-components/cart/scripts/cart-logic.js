@@ -42,14 +42,16 @@ class CartLogic {
     return result;
   }
 
-  _setCount(e) {
+  _setCount(cmd) {
+    console.log('cart:setCount', cmd);
+
     // Update cart
-    const product = this._products.products[e.productID];
-    if(e.count == 0) {
-      delete this._cart.products[e.productID];
+    const product = this._products.products[cmd.productID];
+    if(cmd.count == 0) {
+      delete this._cart.products[cmd.productID];
     } else {
-      this._cart.products[e.productID] = {
-        count: e.count,
+      this._cart.products[cmd.productID] = {
+        count: cmd.count,
         ...product
       }
     }
