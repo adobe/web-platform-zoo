@@ -7,11 +7,12 @@
 
   <title>Shopping Cart Web Components</title>
 
-  <link rel="stylesheet" href="../../../DISABLED-classless.css">
+  <link rel="stylesheet" href="../../../classless-essentials.css">
   <link rel="stylesheet" href="./style.css">
 
   <script type="module" src="components/product-list.js"></script>
   <script type="module" src="components/inc-dec-input.js"></script>
+  <script type="module" src="components/cart-status.js"></script>
 </head>
 
 <body>
@@ -40,7 +41,8 @@
   </section>
   <main>
     <h2>Products</h2>
-    <cart-status itemscope><span itemprop="total.products"></span> products in cart, total <span itemprop="total.items"></span> items, total price USD <span itemprop="total.price"></span></cart-status>
+    <cart-status itemscope>Cart: <b><span itemprop="total.products"></span></b> products, <b><span itemprop="total.items"></span></b> items, USD <b><span itemprop="total.price"></span></b></cart-status>
+    -
     <a href="cart.html">Cart contents</a>
   </main>
   <section id="products">

@@ -17,6 +17,10 @@ And after trying to make it as simple as possible we end up with:
 
 - TODO
 
+## No build step required
+
+TODO explain
+
 ## Shadow DOM or not?
 
 - Yes if you _really_ need CSS isolation

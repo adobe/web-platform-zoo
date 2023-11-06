@@ -54,5 +54,21 @@ product-list article * {
 }
 
 product-list article .price {
-  font-size: 80%;
+  padding-top: 0.2em;
+  font-size: 0.8em;
+}
+
+product-list article .description {
+  padding-top: 0.5em;
+  font-size: 0.8em;
+}
+
+product-list.cart .description {
+  display: none;
+}
+
+product-list article h2 {
+  font-size: 1.2em;
+  font-variant: normal;
+  font-weight: bold;
 }

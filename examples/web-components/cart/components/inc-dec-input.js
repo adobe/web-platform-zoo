@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 import '../scripts/cart-logic.js';
 
 class IncDecInput extends HTMLElement {
+  static observedAttributes = ['value'];
   static template = document.createElement('template');
   static {
     IncDecInput.template.innerHTML = `
@@ -63,6 +64,18 @@ class IncDecInput extends HTMLElement {
 
     // setup all buttons found inside this
     this.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.textContent)));
+  }
+
+  attributeChangedCallback(name, _oldValue, newValueIn) {
+    if (name === 'value') {
+      const newValue = Number(newValueIn);
+      if (!isNaN(newValue) && newValue != this.count) {
+        this.count = newValue;
+        if (this.input) {
+          this.input.value = newValue;
+        }
+      }
+    }
   }
 
   _setCount(cmd) {
