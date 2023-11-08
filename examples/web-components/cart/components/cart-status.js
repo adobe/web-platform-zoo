@@ -11,14 +11,32 @@ governing permissions and limitations under the License.
 
 import '../scripts/cart-logic.js';
 
+// Display the current cart status, dynamically replacing
+// fields marked with microdata attributes with values from
+// the cart.
+//
+// Setting 'role=status' on this component can be useful
+// for accessibility.
 class CartStatus extends HTMLElement {
   connectedCallback() {
-    this.setAttribute('role', 'status');
-    this.setAttribute('style', 'opacity:0');
-    this.lastChange = Date.now();
-    this.status = '';
+    window.addEventListener('cart:changed', this._render.bind(this));
+    this._render();
+  }
 
-    window.addEventListener('cart:status', e => this.textContent = e.detail);
+  _render() {
+    const cart = window.cart.list('cart').cart;
+    this.querySelectorAll('*[itemprop]').forEach(e => this._setValue(e, cart));
+  }
+
+  _setValue(e, cart) {
+    const prop = e.getAttribute('itemprop');
+    if(prop === 'total.products') {
+      e.textContent = cart.nProducts;
+    } else if(prop === 'total.items') {
+      e.textContent = cart.nItems;
+    } else if(prop === 'total.price') {
+      e.textContent = cart.totalPrice;
+    }
   }
 }
 
