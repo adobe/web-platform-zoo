@@ -9,6 +9,12 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
+// Simulate a shopping cart service.
+//
+// State is stored in local storage and
+// Custom Events drive cart contents changes.
+//
+// This module sets window.cart to a CartLogic singleton.
 class CartLogic {
 
   constructor(storageKey, products) {
@@ -18,17 +24,14 @@ class CartLogic {
   }
 
   list(query) {
-    if(query === 'cart') {
-      return this._cart;
-    } else {
-      return this._products;
-    }
+    return query === 'cart' ? this._cart : this._products;
   }
 
   get(id) {
     return this._products.products[id];
   }
 
+  // initial loading of cart data
   _loadCart() {
     var result = { products: {}, cart: { totalPrice: 0, nProducts:0, nItems: 0 }};
     const json = window.localStorage.getItem(this._storageKey);
@@ -42,9 +45,10 @@ class CartLogic {
     return result;
   }
 
+  // Set the current count of specified and emit
+  // a change event if relevant. Triggered by
+  // a cart:setCount CustomEvent.
   _setCount(cmd) {
-    console.log('cart:setCount', cmd);
-
     // Update cart
     const product = this._products.products[cmd.productID];
     if(cmd.count == 0) {
@@ -76,6 +80,7 @@ class CartLogic {
   }
 }
 
+// Set window.cart if needed, with simulated product data
 if (!window.cart) {
   const getJson = async (filename) => {
     const url = `${import.meta.url}${filename}`;
@@ -101,6 +106,7 @@ if (!window.cart) {
     }
     return products;
   }
-  window.cart = new CartLogic('wpzoo-example-shopping-cart', await getProducts());
+  const localStorageKey = 'wpzoo-example-shopping-cart-2';
+  window.cart = new CartLogic(localStorageKey, await getProducts());
   window.addEventListener('cart:setCount', e => window.cart._setCount(e.detail));
 }

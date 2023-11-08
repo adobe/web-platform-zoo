@@ -11,9 +11,15 @@ governing permissions and limitations under the License.
 
 import '../scripts/cart-logic.js';
 
+// Display the list of products. The 'query' attribute
+// can be set to 'cart' to show only the products
+// currently in the cart.
 class ProductList extends HTMLElement {
   static template = document.createElement('template');
   static {
+    // TODO we might optionally get the template from
+    // the current document, driven by an attribute
+    // on this component. Didn't need that so far.
     ProductList.template.innerHTML = `
       <article itemscope class="product">
         <img itemprop="image">
@@ -26,6 +32,7 @@ class ProductList extends HTMLElement {
   }
 
   connectedCallback() {
+    // get and render products
     const products = window.cart.list(this.getAttribute('query'))?.products;
     for (let k of Object.keys(products)) {
       const product = products[k];
@@ -34,10 +41,13 @@ class ProductList extends HTMLElement {
       article.querySelectorAll('*[itemprop]').forEach(e => this._setStaticValues(e, product));
       this.append(article);
     }
+
+    // watch for changes
     window.addEventListener('cart:changed', this._setCartValues.bind(this));
     this._setCartValues();
   }
 
+  // set values from the current cart state
   _setCartValues() {
     this.querySelectorAll('article').forEach(article => {
       const product = window.cart.list()?.products[article.getAttribute('itemid')];
@@ -64,6 +74,7 @@ class ProductList extends HTMLElement {
     });
   }
 
+  // set values which do not depend on the cart state
   _setStaticValues(e, product) {
     const prop = e.getAttribute('itemprop');
     if (prop === 'image') {

@@ -11,6 +11,7 @@ governing permissions and limitations under the License.
 
 import '../scripts/cart-logic.js';
 
+// Generic increment/decrement input field
 class IncDecInput extends HTMLElement {
   static observedAttributes = ['value'];
   static template = document.createElement('template');
