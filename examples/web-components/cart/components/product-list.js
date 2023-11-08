@@ -56,7 +56,11 @@ class ProductList extends HTMLElement {
     this.querySelectorAll('article').forEach(article => {
       const product = window.cart.list()?.products[article.getAttribute('itemid')];
       const inCart = window.cart.list('cart')?.products[product?.id];
-      article.querySelector('inc-dec-input')?.setAttribute('value', inCart ? inCart.count : 0);
+      const incdec = article.querySelector('inc-dec-input');
+      if(incdec) {
+        incdec.setAttribute('value', inCart ? inCart.count : 0);
+        incdec.setAttribute('aria-label', product.name);
+      }
       if(!product) {
         console.log('setCartValues', `product not found: ${product?.id})`);
         return;

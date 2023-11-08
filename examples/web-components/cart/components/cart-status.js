@@ -15,10 +15,19 @@ import '../scripts/cart-logic.js';
 // fields marked with microdata attributes with values from
 // the cart.
 //
-// Setting 'role=status' on this component can be useful
-// for accessibility.
+// Sends an a11y:status event when this content changes, so
+// that the cart status can be spoken by a11y tools.
+//
 class CartStatus extends HTMLElement {
   connectedCallback() {
+
+    // If this contains a link with class=speakOnFocus, speak the contents of the (otherwise unused)
+    // a11y-speak element when the link gets focus
+    const a = this.querySelector('a[class=speakOnFocus]');
+    if(a) {
+      a.addEventListener('focus', this._speakText.bind(this));
+    }
+
     window.addEventListener('cart:changed', this._render.bind(this));
     this._render();
   }
@@ -26,6 +35,14 @@ class CartStatus extends HTMLElement {
   _render() {
     const cart = window.cart.list('cart').cart;
     this.querySelectorAll('*[itemprop]').forEach(e => this._setValue(e, cart));
+  }
+
+  _speakText() {
+    const toSpeak = this.querySelector('a11y-speak');
+    if(toSpeak) {
+      const detail = { status : toSpeak.textContent };
+      window.dispatchEvent(new CustomEvent('a11y:status', { detail }));
+    }
   }
 
   _setValue(e, cart) {

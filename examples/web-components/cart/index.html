@@ -13,6 +13,7 @@
   <script type="module" src="components/product-list.js"></script>
   <script type="module" src="components/inc-dec-input.js"></script>
   <script type="module" src="components/cart-status.js"></script>
+  <script type="module" src="components/a11y-status.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
   <section>
     <h1>Shopping cart using Web Components</h1>
     <p>
-      <em>V0.15, fixed keyboard navigation and input in the product list</em>
+      <em>V0.16, a11y improvements</em>
     </p>
     <p>
       See the <a href="https://github.com/adobe/web-platform-zoo/blob/main/examples/web-components/cart/README.md">README</a> for goals, design decisions and status.
@@ -33,14 +34,19 @@
   </section>
   <main>
     <h2>Products</h2>
-    <cart-status itemscope>Cart: <b><span itemprop="total.products"></span></b> products, <b><span itemprop="total.items"></span></b> items, USD <b><span itemprop="total.price"></span></b></cart-status>
-    -
-    <a href="cart.html">Cart contents</a>
+    <cart-status itemscope>
+      <a11y-speak>
+        Cart: <b><span itemprop="total.products"></span></b> products,
+        <b><span itemprop="total.items"></span></b> items,
+        USD <b><span itemprop="total.price"></span></b>
+      </a11y-speak>
+      - <a class="speakOnFocus" href="cart.html">Cart contents</a>
+    </cart-status>
   </main>
   <section id="products">
     <product-list aria-label="Products list" aria-role="list"></product-list>
   </section>
-  <cart-status role="status"></cart-status>
+  <a11y-status></a11y-status>
 </body>
 
 </html>

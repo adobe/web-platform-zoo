@@ -34,7 +34,7 @@ class IncDecInput extends HTMLElement {
         font-size: var(--cart-product-button-font-size, 100%);
       }
     </style>
-    <span role='slider' aria-label='in cart'>
+    <span>
       <slot></slot>
     </span>
   `;
@@ -50,6 +50,10 @@ class IncDecInput extends HTMLElement {
     this.eventName = this.getAttribute('event');
     this.shadowRoot.append(IncDecInput.template.content.cloneNode(true));
 
+    this.setAttribute('role', 'slider');
+    this.setAttribute('aria-valuenow', `${this.count}`);
+
+
     // for itemId, use the itemid of the closest itemscope element
     const eId = this.closest('*[itemscope]');
     if (eId) {
@@ -61,8 +65,10 @@ class IncDecInput extends HTMLElement {
     if (this.input) {
       this.input.value = this.count;
       this.input.addEventListener('keyup', e => this._setCount(e.key));
-      //this.input.addEventListener('change', this._setCount('nochange'));
     }
+
+    // propagate our selection status, for accessibility
+    this.input.addEventListener('focus', this._propagateFocusEvent.bind(this));
 
     // setup all buttons found inside this
     this.querySelectorAll('button').forEach(b => b.addEventListener('click', this._setCount.bind(this, b.textContent)));
@@ -80,7 +86,16 @@ class IncDecInput extends HTMLElement {
     }
   }
 
-  _sendChangeEvent(valueToSend) {
+  _propagateFocusEvent() {
+      const label = this.getAttribute('aria-label');
+      if(label) {
+        const detail = { status : `${label} selected` };
+        window.dispatchEvent(new CustomEvent('a11y:status', { detail }));
+      }
+  }
+
+  _sendChangeEvent() {
+      this.setAttribute('aria-valuenow', this.count);
       const detail = { productID: this.itemID, count: this.count };
       window.dispatchEvent(new CustomEvent(this.eventName, { detail }));
   }
@@ -118,7 +133,7 @@ class IncDecInput extends HTMLElement {
     }
     this.input.value = this.count;
 
-    //this.slider.setAttribute('aria-valuenow', `${this.count}`);
+    this.setAttribute('aria-valuenow', `${this.count}`);
   }
 }
 
