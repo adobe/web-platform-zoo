@@ -49,6 +49,8 @@ class CartLogic {
   // a change event if relevant. Triggered by
   // a cart:setCount CustomEvent.
   _setCount(cmd) {
+    cmd.count = Number(cmd.count);
+
     // Update cart
     const product = this._products.products[cmd.productID];
     if(cmd.count == 0) {

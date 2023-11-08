@@ -61,6 +61,7 @@ class IncDecInput extends HTMLElement {
     if (this.input) {
       this.input.value = this.count;
       this.input.addEventListener('keyup', e => this._setCount(e.key));
+      //this.input.addEventListener('change', this._setCount('nochange'));
     }
 
     // setup all buttons found inside this
@@ -79,9 +80,22 @@ class IncDecInput extends HTMLElement {
     }
   }
 
+  _sendChangeEvent(valueToSend) {
+      const detail = { productID: this.itemID, count: this.count };
+      window.dispatchEvent(new CustomEvent(this.eventName, { detail }));
+  }
+
   _setCount(cmd) {
     var delta = 0;
-    if (cmd == 'ArrowUp' || cmd == '+') {
+    const oldCount = this.count;
+    if(!isNaN(Number(cmd)) || cmd === 'Backspace') {
+      // use the default 'input' element processing and inform of the change
+      this.count = Number(this.input.value);
+      if(this.count != oldCount) {
+        this._sendChangeEvent();
+      }
+      return false;
+    } else if (cmd == 'ArrowUp' || cmd == '+') {
       delta = '1';
     } else if (cmd == 'PageUp') {
       delta = 10;
@@ -90,7 +104,6 @@ class IncDecInput extends HTMLElement {
     } else if (cmd == 'PageDown') {
       delta = -10;
     }
-    const oldCount = this.count;
     if (!isNaN(delta)) {
       this.count += Number(delta);
     } else {
@@ -101,8 +114,7 @@ class IncDecInput extends HTMLElement {
     }
     this.count = Math.floor(Math.max(0, this.count));
     if (this.count != oldCount) {
-      const detail = { productID: this.itemID, count: this.count };
-      window.dispatchEvent(new CustomEvent(this.eventName, { detail }));
+      this._sendChangeEvent();
     }
     this.input.value = this.count;
 

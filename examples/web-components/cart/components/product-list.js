@@ -24,7 +24,11 @@ class ProductList extends HTMLElement {
       <article itemscope class="product">
         <img itemprop="image">
         <h2 itemprop="name"></h2>
-        <inc-dec-input itemprop="cart.product.total.count" data-set-attr="value" event="cart:setCount"><button>+</button><input size="4"></input><button>-</button></inc-dec-input>
+        <inc-dec-input itemprop="cart.product.total.count" data-set-attr="value" event="cart:setCount">
+          <button tabindex='-1'>+</button>
+          <input size="4"></input>
+          <button tabindex='-1' tabindex='-1'>-</button>
+        </inc-dec-input>
         <p class="price">USD&ThinSpace;<span itemprop="price"></span>:<b><span itemprop="cart.product.total.count"></span></b>&ThinSpace;in cart&ThinSpace;&rightarrow;&ThinSpace;USD&ThinSpace;<b><span itemprop="cart.product.total.price"></span></b></p>
         <p itemprop="description" class="description"></p>
       </article>

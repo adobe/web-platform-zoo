@@ -5,7 +5,7 @@ This is a work in progress example, which implements a shopping cart using Web C
 
 It is meant as a tutorial to demonstrate:
 
-- How to design Web Components without using any libraries to demonstrate the basic principles
+- How to design Web Components without using the [Web Platform](https://en.wikipedia.org/wiki/Web_platform) only, no libraries, to demonstrate the basic principles
 - How to (hopefully) find the right balance between reusability and simplicity
 - When use Shadow DOM and how to benefit from CSS and DOM scoping
 - Using Custom Events for commands and state propagation
