@@ -23,7 +23,7 @@ Examples used to generate & debug the `todomvc` tests:
  * npx playwright test -g todomvc --project firefox
  * npx playwright test -g todomvc --project firefox --timeout 25000 --debug
 
-## Experiments
+## Experiments
 
 A few additional [experiments](./experiments) are also found in this repository,
 and they're just that. Use at your own risk, like anything else in this
