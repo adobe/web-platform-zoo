@@ -33,7 +33,9 @@ export default async function bundle(generatorName, classes) {
     ],
     treeshake: 'smallest'
   };
-  const outputOptions = {};
+  const outputOptions = {
+    format: 'iife'
+  };
 
   const bundle = await rollup(inputOptions);
   const output = await bundle.generate(outputOptions);

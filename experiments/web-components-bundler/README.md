@@ -40,6 +40,14 @@ or any other code for that matter, if dynamic bundling (using
 
 See below for how to run this module, the test homepage has a few test links.
 
+## Staged loading
+
+This also enables staged loading, where some components are loaded early and others later, to
+help [optimize the Largest Contentful Paint](https://web.dev/articles/optimize-lcp) for example.
+
+The [bundled.html](./public/bundled.html) example uses this technique to delay loading some
+components, to show how this can work.
+
 ## Findings
 
 As of the initial Web Platform Zoo commit:

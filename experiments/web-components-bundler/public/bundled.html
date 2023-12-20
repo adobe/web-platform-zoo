@@ -3,7 +3,7 @@
 
 <head>
   <title>Testing UI5 components loading</title>
-  <script src="/bundler/ui5/Card,CardHeader,Icon,List,StandardListItem.js"></script>
+  <script src="/bundler/ui5/Icon,List,StandardListItem.js"></script>
 </head>
 
 <body>
@@ -13,12 +13,28 @@
     <a href="https://rollupjs.org/javascript-api/">rollup</a>-based bundler.
   </p>
   <p>
+    The Card and CardHeader components are loaded two seconds later than the others,
+    to demonstrate staged loading, so the cards borders appear after this delay. 
+    In real life we'd use a setup where components which are not required for LCP are
+    loaded lazily.
+  </p>
+  <p>
     A crude cache mechanism is used server-side, so refreshing this page during the cache
     validity (see <code>config.js</code>) should be much faster as that skips the code bundling operation.
+  </p>
+  <p>
+    <loader-status>The Card and CardHeader components are not loaded yet..</loader-status>
   </p>
   <style>
     ui5-card {
       width: 22rem;
+    }
+    loader-status[status='loading'] {
+      color:blue;
+      font-weight: bold;
+    }
+    loader-status[status='loaded'] {
+      color:green;
     }
   </style>
   <ui5-card>
@@ -28,6 +44,20 @@
       <ui5-li description="Quality Specialist">Salvador Dali</ui5-li>
     </ui5-list>
   </ui5-card>
+
+  <script>
+    // Wait for loading some components, to demonstrate staged loading
+    const cc = 'Card,CardHeader';
+    const waitSeconds = 2;
+    const status = document.querySelector('loader-status');
+    status.setAttribute('status', 'loading');
+    status.textContent = `${cc} components will be loaded in ${waitSeconds} seconds to simulate staged loading.`
+    setTimeout(() => {
+      import(`/bundler/ui5/${cc}.js`);
+      status.setAttribute('status', 'loaded');
+      status.textContent = `${cc} components are now loaded.`;
+    }, waitSeconds * 1000);
+  </script>
 </body>
 
 </html>
