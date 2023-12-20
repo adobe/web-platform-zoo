@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Testing UI5 components loading</title>
+</head>
+
+<body>
+  <h1>UI5 components loading examples</h1>
+
+  <h2>Test pages</h2>
+  <p>
+    The pages listed below should look the same, but the bundled
+    variant should load much less JavaScript code, in a single request.
+  </p>
+  <dl>
+    <dt><a href="./naive.html">Naive loading</a></dt>
+    <dd>Load each component "naively" from <code>node_modules</code></dd>
+    <dt><a href="./bundled.html">Bundled loading</a></dt>
+    <dd>Use our rollup-driven bundler for the Web Components code</dd>
+  </dl>
+
+  <h2>Example code bundles</h2>
+  <p>
+    Here are a few examples of successful code bundling.
+  </p>
+  <dl>
+    <dt><a href="/bundler/ui5/Card,CardHeader.js">Two components</a></dt>
+    <dd>Component names are expressed in the URL</code></dd>
+
+    <dt><a href="/bundler/ui5/Avatar,AvatarGroup,Badge,Breadcrumbs,BreadcrumbsItem,BusyIndicator,Button,Calendar,CalendarDate,CalendarHeader,CalendarPart,Card,CardHeader,Carousel,CheckBox,ColorPalette,ColorPaletteItem,ColorPalettePopover,ColorPicker,ComboBox,ComboBoxGroupItem,ComboBoxItem,CustomListItem,DateComponentBase,DatePicker,DateRangePicker,DateTimePicker,DayPicker,Dialog,FileUploader,GroupHeaderListItem,Icon,Input,Label,Link,List,ListItem,ListItemBase,Menu,MenuItem,MessageStrip,MonthPicker,MultiComboBox,MultiComboBoxGroupItem,MultiComboBoxItem,MultiInput,Option,Panel,Popover,Popup,ProgressIndicator,RadioButton,RadioButtonGroup,RangeSlider,RatingIndicator,ResponsivePopover,SegmentedButton,SegmentedButtonItem,Select,SelectMenu,SelectMenuOption,Slider,SliderBase,SplitButton,StandardListItem,StepInput,SuggestionGroupItem,SuggestionItem,SuggestionListItem,Switch,Tab,TabContainer,TabSeparator,Table,TableCell,TableColumn,TableGroupRow,TableRow,TextArea,TimePicker,TimePickerBase,TimePickerClock,TimePickerInternals,TimeSelection,TimeSelectionClocks,TimeSelectionInputs,Title,Toast,ToggleButton,ToggleSpinButton,Token,Tokenizer,Toolbar,ToolbarButton,ToolbarItem,ToolbarSelect,ToolbarSelectOption,ToolbarSeparator,ToolbarSpacer,Tree,TreeItem,TreeItemBase,TreeItemCustom,TreeList,WheelSlider,YearPicker.js">Many UI5 components</a></dt>
+    <dd>Failing components removed, see below</code></dd>
+  </dl>
+
+  <h2>Failing code bundles</h2>
+  <p>
+    The following examples currently fail:
+  </p>
+  <ul>
+    <li><a href="/bundler/ui5/Assets.js">Assets</a></li>
+    <li><a href="/bundler/ui5/Filters.js">Filters</a></li>
+    <li><a href="/bundler/ui5/Interfaces.js">Interfaces</a></li>
+    <li><a href="/bundler/ui5/ToolbarRegistry.js">ToolbarRegistry</a></li>
+    <li><a href="/bundler/ui5/Assets,Avatar,AvatarGroup,Badge,Breadcrumbs,BreadcrumbsItem,BusyIndicator,Button,Calendar,CalendarDate,CalendarHeader,CalendarPart,Card,CardHeader,Carousel,CheckBox,ColorPalette,ColorPaletteItem,ColorPalettePopover,ColorPicker,ComboBox,ComboBoxGroupItem,ComboBoxItem,CustomListItem,DateComponentBase,DatePicker,DateRangePicker,DateTimePicker,DayPicker,Dialog,FileUploader,Filters,GroupHeaderListItem,Icon,Input,Interfaces,Label,Link,List,ListItem,ListItemBase,Menu,MenuItem,MessageStrip,MonthPicker,MultiComboBox,MultiComboBoxGroupItem,MultiComboBoxItem,MultiInput,Option,Panel,Popover,Popup,ProgressIndicator,RadioButton,RadioButtonGroup,RangeSlider,RatingIndicator,ResponsivePopover,SegmentedButton,SegmentedButtonItem,Select,SelectMenu,SelectMenuOption,Slider,SliderBase,SplitButton,StandardListItem,StepInput,SuggestionGroupItem,SuggestionItem,SuggestionListItem,Switch,Tab,TabContainer,TabSeparator,Table,TableCell,TableColumn,TableGroupRow,TableRow,TextArea,TimePicker,TimePickerBase,TimePickerClock,TimePickerInternals,TimeSelection,TimeSelectionClocks,TimeSelectionInputs,Title,Toast,ToggleButton,ToggleSpinButton,Token,Tokenizer,Toolbar,ToolbarButton,ToolbarItem,ToolbarRegistry,ToolbarSelect,ToolbarSelectOption,ToolbarSeparator,ToolbarSpacer,Tree,TreeItem,TreeItemBase,TreeItemCustom,TreeList,WheelSlider,YearPicker.js">All UI5 components</a></li>
+  </ul>
+
+</body>
+
+</html>

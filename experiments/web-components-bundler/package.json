@@ -1,0 +1,27 @@
+{
+  "name": "experimental-web-components-bundler",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Experimental dynamic bundling of Web Components code",
+  "main": "index.js",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-virtual": "^3.0.2",
+    "@ui5/webcomponents": "^1.20.1",
+    "compression": "^1.7.4",
+    "express": "^4.18.2",
+    "rollup": "^4.9.1",
+    "tmp": "^0.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

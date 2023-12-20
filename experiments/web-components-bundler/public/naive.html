@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Testing UI5 components loading</title>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "@ui5/": "/node_modules/@ui5/",
+        "lit-html/": "/node_modules/lit-html/",
+        "lit-html": "/node_modules/lit-html/lit-html.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+    if (!HTMLScriptElement.supports?.("importmap")) {
+      throw new Error('importmap not supported, this won\'t work');
+    }
+
+    // Verify importmap setup
+    import { render, html, svg, } from "lit-html";
+
+    // Import components that this page uses
+    import Card from '@ui5/webcomponents/dist/Card.js';
+    import Icon from '@ui5/webcomponents/dist/Icon.js';
+    import CardHeader from '@ui5/webcomponents/dist/CardHeader.js';
+    import List from '@ui5/webcomponents/dist/List.js';
+    import StandardListItem from '@ui5/webcomponents/dist/StandardListItem.js';
+  </script>
+</head>
+
+<body>
+  <h1>UI5 components test</h1>
+  <style>
+    ui5-card {
+      width: 22rem;
+    }
+  </style>
+  <p>
+    This is the <em>naive</em> variant, which loads the code of each Web Component
+    individually from the <code>node_modules</code> folder.
+  </p>
+  <ui5-card>
+    <ui5-list separators="None" style="margin-block-end: 0.75rem;">
+      <ui5-li description="Software Architect">Leonardo DaVinci</ui5-li>
+      <ui5-li description="Visual Designer">Marie Curie</ui5-li>
+      <ui5-li description="Quality Specialist">Salvador Dali</ui5-li>
+    </ui5-list>
+  </ui5-card>
+</body>
+
+</html>
