@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Testing UI5 components loading</title>
+  <script src="/bundler/ui5/Avatar,AvatarGroup,Badge,Breadcrumbs,BreadcrumbsItem,BusyIndicator,Button,Calendar,CalendarDate,CalendarHeader,CalendarPart,Card,CardHeader,Carousel,CheckBox,ColorPalette,ColorPaletteItem,ColorPalettePopover,ColorPicker,ComboBox,ComboBoxGroupItem,ComboBoxItem,CustomListItem,DateComponentBase,DatePicker,DateRangePicker,DateTimePicker,DayPicker,Dialog,FileUploader,GroupHeaderListItem,Icon,Input,Label,Link,List,ListItem,ListItemBase,Menu,MenuItem,MessageStrip,MonthPicker,MultiComboBox,MultiComboBoxGroupItem,MultiComboBoxItem,MultiInput,Option,Panel,Popover,Popup,ProgressIndicator,RadioButton,RadioButtonGroup,RangeSlider,RatingIndicator,ResponsivePopover,SegmentedButton,SegmentedButtonItem,Select,SelectMenu,SelectMenuOption,Slider,SliderBase,SplitButton,StandardListItem,StepInput,SuggestionGroupItem,SuggestionItem,SuggestionListItem,Switch,Tab,TabContainer,TabSeparator,Table,TableCell,TableColumn,TableGroupRow,TableRow,TextArea,TimePicker,TimePickerBase,TimePickerClock,TimePickerInternals,TimeSelection,TimeSelectionClocks,TimeSelectionInputs,Title,Toast,ToggleButton,ToggleSpinButton,Token,Tokenizer,Toolbar,ToolbarButton,ToolbarItem,ToolbarSelect,ToolbarSelectOption,ToolbarSeparator,ToolbarSpacer,Tree,TreeItem,TreeItemBase,TreeItemCustom,TreeList,WheelSlider,YearPicker.js"></script>
+</head>
+
+<body>
+  <h1>All UI5 components loaded</h1>
+  <p>
+    This variant loads all the UI5 components, to compare loading performance.
+  </p>
+  <style>
+    ui5-card {
+      width: 22rem;
+    }
+  </style>
+  <ui5-card>
+    <ui5-list separators="None" style="margin-block-end: 0.75rem;">
+      <ui5-li description="Software Architect">Leonardo DaVinci</ui5-li>
+      <ui5-li description="Visual Designer">Marie Curie</ui5-li>
+      <ui5-li description="Quality Specialist">Salvador Dali</ui5-li>
+    </ui5-list>
+  </ui5-card>
+</body>
+
+</html>

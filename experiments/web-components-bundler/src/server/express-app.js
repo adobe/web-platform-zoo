@@ -15,7 +15,7 @@ import config from '../../config.js';
 import { Cache } from 'file-system-cache';
 
 const versionInfo = {
-  version: 0.5,
+  version: 0.6,
   status: 'early prototype',
   src: 'https://github.com/adobe/web-platform-zoo/tree/main/experiments/web-components-bundler',
 }
