@@ -16,7 +16,8 @@ is just a proof of concept.
 
 For production this would need to be configured with a CDN cache
 in front, as bundling takes some time, about 400 msec on an M1
-laptop.
+laptop. This prototype uses a basic file-based cache to simulate
+this.
 
 The initial demo uses [UI5 Web Components](https://sap.github.io/ui5-webcomponents/),
 as I was not familiar with that library it looked like a good starting point.
@@ -59,9 +60,6 @@ As of the initial Web Platform Zoo commit:
 - There's still no build step, as the code bundling and optimization happens on demand in this service.
 
 It might be possible to further reduce the size of the bundled JavaScript code, by optimizing the rollup settings.
-
-Note that the _very_ basic caching mechanism can lead to high resource usage, for real
-use we'd disable it and use an HTTP cache in front.
 
 ## How to run this locally
 
