@@ -1,0 +1,15 @@
+service: web-components-bundler
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: eu-west-3
+  runtime: nodejs18.x
+  environment:
+    NOT_USED: "ok"
+
+functions:
+  api:
+    handler: src/server/serverless-handler.handler
+    events:
+      - httpApi: '*'

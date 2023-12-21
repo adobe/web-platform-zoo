@@ -63,9 +63,25 @@ It might be possible to further reduce the size of the bundled JavaScript code, 
 Note that the _very_ basic caching mechanism can lead to high resource usage, for real
 use we'd disable it and use an HTTP cache in front.
 
-## How to run this
+## How to run this locally
 
     npm install 
     npm run dev
 
 And then open http://localhost:3000/
+
+## Deployment on AWS Lambda
+
+A basic setup is provided to deploy this to Lambda using the
+[serverless framework](https://www.serverless.com/).
+
+To deploy, configure your AWS credentials as environment variables
+(`AWS_ACCESS_KEY_ID` etc.) and run `npm run deploy`.
+
+Once deployed, that command will output the URL at which the
+service can be accessed.
+
+Notes:
+- When running on Lambda, the crude internal caching mechanism only works if you're lucky, as cached data is stored in the Node.js process. We'll need a proper HTTP caching layer, of course.
+- This required switching from plain `rollup` to
+`@rollup/wasm-node` in this module's dependencies.

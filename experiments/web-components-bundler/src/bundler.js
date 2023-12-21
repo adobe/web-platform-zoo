@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 
 // Generate optimized code using rollup, see https://rollupjs.org/javascript-api/
 
-import { rollup } from 'rollup';
+import { rollup } from '@rollup/wasm-node';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import virtual from '@rollup/plugin-virtual';
 import generators from './generators.js';

@@ -9,9 +9,9 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 import express from 'express';
-import bundle from './src/bundler.js';
+import bundle from '../bundler.js';
 import compression from 'compression';
-import config from './config.js';
+import config from '../../config.js';
 
 const app = express();
 app.use(compression());
@@ -34,6 +34,14 @@ const purgeCache = () => {
   });
 };
 
+app.get('/info', async (req, resp) => {
+  resp.send({
+    version: 0.1,
+    status: 'early prototype',
+    src: 'https://github.com/adobe/web-platform-zoo/tree/main/experiments/web-components-bundler',
+  });
+});
+
 app.get('/bundler/:template/:classes(*).js', async (req, resp) => {
   const { template, classes } = req.params;
   const cacheKey = `${template}/${classes}`
@@ -55,15 +63,4 @@ app.get('/bundler/:template/:classes(*).js', async (req, resp) => {
   purgeCache();
 });
 
-const port = 3000;
-const server = app.listen({ port }, () => 
-  console.log(`Listening on port: ${port}`)
-);
-
-
-
-// * @see {https://jira.corp.adobe.com/browse/EON-6340}
-// * @see {https://nodejs.org/docs/latest-v10.x/api/http.html#http_server_keepalivetimeout}
-// * @see {https://github.com/envoyproxy/envoy/issues/1979}
-
-server.keepAliveTimeout = 0;
+export default app;
