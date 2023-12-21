@@ -12,9 +12,10 @@ import express from 'express';
 import bundle from '../bundler.js';
 import compression from 'compression';
 import config from '../../config.js';
+import { Cache } from 'file-system-cache';
 
 const versionInfo = {
-  version: 0.2,
+  version: 0.3,
   status: 'early prototype',
   src: 'https://github.com/adobe/web-platform-zoo/tree/main/experiments/web-components-bundler',
 }
@@ -24,21 +25,11 @@ app.use(compression());
 app.use(express.static('public'));
 app.use('/node_modules', express.static('node_modules'));
 
-// Use a crude cache for this prototype, in production we'd use a CDN in front
-const cache = {};
-
-const purgeCache = () => {
-  const toPurge = [];
-  for(const k of Object.keys(cache)) {
-    if(cache[k].expires < Date.now()) {
-      toPurge.push(k);
-    }
-  }
-  toPurge.forEach(k => {
-    console.log('*** clearing cache entry', k);
-    delete cache[k];
-  });
-};
+const cache = new Cache({
+  basePath: "/tmp/bundler-cache",
+  ns: 'wcb',
+  ttl: config.bundledCodeCacheTTLSeconds
+});
 
 app.get('/info', async (req, resp) => {
   resp.send(versionInfo);
@@ -50,19 +41,16 @@ app.get('/bundler/:template/:classes(*).js', async (req, resp) => {
   var b;
 
   try {
-    if(cache[cacheKey]) {
-      b = cache[cacheKey];
-    } else {
+    var b = await cache.get(cacheKey);
+    if(!b) {
       b = await bundle(template, classes.split(','));
-      b.expires = Date.now() + config.bundledCodeCacheTTLmsec;
-      cache[cacheKey] = b;
+      await cache.set(cacheKey, b);
     }
     resp.setHeader('Cache-Control', `public, stale-while-revalidate, max-age=${b.cacheTTLSeconds}`);
     resp.contentType(b.contentType).send(b.content).end();
   } catch(e) {
     resp.status(404).send(e + '');
   }
-  purgeCache();
 });
 
 export default app;

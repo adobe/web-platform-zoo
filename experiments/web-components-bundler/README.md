@@ -81,7 +81,5 @@ To deploy, configure your AWS credentials as environment variables
 Once deployed, that command will output the URL at which the
 service can be accessed.
 
-Notes:
-- When running on Lambda, the crude internal caching mechanism only works if you're lucky, as cached data is stored in the Node.js process. We'll need a proper HTTP caching layer, of course.
-- This required switching from plain `rollup` to
+Note that this required switching from plain `rollup` to
 `@rollup/wasm-node` in this module's dependencies.
