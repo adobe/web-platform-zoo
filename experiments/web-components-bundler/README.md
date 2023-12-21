@@ -45,7 +45,7 @@ See below for how to run this module, the test homepage has a few test links.
 This also enables staged loading, where some components are loaded early and others later, to
 help [optimize the Largest Contentful Paint](https://web.dev/articles/optimize-lcp) for example.
 
-The [bundled.html](./public/bundled.html) example uses this technique to delay loading some
+The [bundled-with-delay.html](./public/bundled-with-delay.html) example uses this technique to delay loading some
 components, to show how this can work.
 
 ## Findings

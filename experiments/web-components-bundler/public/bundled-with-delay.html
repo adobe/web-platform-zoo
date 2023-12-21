@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Testing UI5 components loading</title>
+  <script src="/bundler/ui5/Icon,List,StandardListItem.js"></script>
+</head>
+
+<body>
+  <h1>UI5 components with staged loading</h1>
+  <p>
+    This is the same page as <a href="./bundled.html">bundled.html</a>, but some components
+    are loaded later to demonstrate staged loading.
+    In real life we'd use a setup where components which are not required for LCP are
+    loaded lazily.
+  </p>
+  <p>
+    <loader-status>The Card and CardHeader components are not loaded yet..</loader-status>
+  </p>
+  <style>
+    ui5-card {
+      width: 22rem;
+    }
+    loader-status[status='loading'] {
+      color:blue;
+      font-weight: bold;
+    }
+    loader-status[status='loaded'] {
+      color:green;
+    }
+  </style>
+  <ui5-card>
+    <ui5-list separators="None" style="margin-block-end: 0.75rem;">
+      <ui5-li description="Software Architect">Leonardo DaVinci</ui5-li>
+      <ui5-li description="Visual Designer">Marie Curie</ui5-li>
+      <ui5-li description="Quality Specialist">Salvador Dali</ui5-li>
+    </ui5-list>
+  </ui5-card>
+
+  <script>
+    // Wait for loading some components, to demonstrate staged loading
+    const cc = 'Card,CardHeader';
+    const waitSeconds = 2;
+    const status = document.querySelector('loader-status');
+    status.setAttribute('status', 'loading');
+    status.textContent = `${cc} components will be loaded in ${waitSeconds} seconds to simulate staged loading.`
+    setTimeout(() => {
+      import(`/bundler/ui5/${cc}.js`);
+      status.setAttribute('status', 'loaded');
+      status.textContent = `${cc} components are now loaded.`;
+    }, waitSeconds * 1000);
+  </script>
+</body>
+
+</html>

@@ -13,6 +13,12 @@ import bundle from '../bundler.js';
 import compression from 'compression';
 import config from '../../config.js';
 
+const versionInfo = {
+  version: 0.2,
+  status: 'early prototype',
+  src: 'https://github.com/adobe/web-platform-zoo/tree/main/experiments/web-components-bundler',
+}
+
 const app = express();
 app.use(compression());
 app.use(express.static('public'));
@@ -35,11 +41,7 @@ const purgeCache = () => {
 };
 
 app.get('/info', async (req, resp) => {
-  resp.send({
-    version: 0.1,
-    status: 'early prototype',
-    src: 'https://github.com/adobe/web-platform-zoo/tree/main/experiments/web-components-bundler',
-  });
+  resp.send(versionInfo);
 });
 
 app.get('/bundler/:template/:classes(*).js', async (req, resp) => {
