@@ -14,7 +14,8 @@ Smaller bundles help with page loading performance,
 but creating bundles for specific sets of components is hard to
 manage efficiently. Using dynamic bundling, developers can specify which
 components they need in a given page (and when) by using URLs like
-`/bundler/Card,List,StandardListItem.js` in the page markup.
+`/bundler/Card,List,StandardListItem.js` in the page markup and get
+optimized JavaScript code which just what's needed for that page.
 
 Note that I'm no expert in JS code bundling and tree shaking, so
 bundling code improvements are certainly possible, for now this
