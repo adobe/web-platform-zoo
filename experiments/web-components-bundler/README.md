@@ -10,6 +10,12 @@ The goal is to serve dynamically created JavaScript code bundles,
 built to include specific sets of Web Components defined by the
 bundle URL.
 
+Smaller bundles help with page loading performance,
+but creating bundles for specific sets of components is hard to
+manage efficiently. Using dynamic bundling, developers can specify which
+components they need in a given page (and when) by using URLs like
+`/bundler/Card,List,StandardListItem.js` in the page markup.
+
 Note that I'm no expert in JS code bundling and tree shaking, so
 bundling code improvements are certainly possible, for now this
 is just a proof of concept.
@@ -22,12 +28,11 @@ this.
 The initial demo uses [UI5 Web Components](https://sap.github.io/ui5-webcomponents/),
 as I was not familiar with that library it looked like a good starting point.
 And bundling required no special code besides just importing the required
-modules. A small number of them currently fail, for details run this and
-see the test homepage.
+modules. This module provides a test homepage with relevant links.
 
 The same technique should work with other Web Components libraries,
 or any other code for that matter, if dynamic bundling (using
-[rollup.js](https://rollupjs.org/) in the current) works.
+[rollup.js](https://rollupjs.org/) in the current) works for them.
 
 ## Usage Scenario
 
