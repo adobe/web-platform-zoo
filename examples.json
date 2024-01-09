@@ -57,4 +57,11 @@
   "tags": [ "webcomponent", "todomvc" ]
 }
 },
+{
+"path":"./examples/web-components/visible-for/",
+"data": {
+  "name": "Visibility Time Web Component",
+  "tags": [ "webcomponent", "visibility" ]
+}
+},
 {}]}
