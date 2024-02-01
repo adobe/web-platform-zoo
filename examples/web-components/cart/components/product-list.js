@@ -14,33 +14,29 @@ import '../scripts/cart-logic.js';
 // Display the list of products. The 'query' attribute
 // can be set to 'cart' to show only the products
 // currently in the cart.
+//
+// The 'template' attribute points to an HTML template
+// file in the 'templates' folder.
+//
 class ProductList extends HTMLElement {
-  static template = document.createElement('template');
-  static {
-    // TODO we might optionally get the template from
-    // the current document, driven by an attribute
-    // on this component. Didn't need that so far.
-    ProductList.template.innerHTML = `
-      <article itemscope class="product">
-        <img itemprop="image">
-        <h2 itemprop="name"></h2>
-        <inc-dec-input itemprop="cart.product.total.count" data-set-attr="value" event="cart:setCount">
-          <button tabindex='-1'>+</button>
-          <input size="4"></input>
-          <button tabindex='-1' tabindex='-1'>-</button>
-        </inc-dec-input>
-        <p class="price">USD&ThinSpace;<span itemprop="price"></span>:<b><span itemprop="cart.product.total.count"></span></b>&ThinSpace;in cart&ThinSpace;&rightarrow;&ThinSpace;USD&ThinSpace;<b><span itemprop="cart.product.total.price"></span></b></p>
-        <p itemprop="description" class="description"></p>
-      </article>
-    `;
+  static attrTemplate = 'template';
+  #template;
+
+  constructor() {
+    super();
+    this.#template = this.getAttribute(ProductList.attrTemplate);
+    if(!this.#template) {
+      throw new Error(`Missing required attribute: ${ProductList.attrTemplate}`);
+    }
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     // get and render products
     const products = window.cart.list(this.getAttribute('query'))?.products;
     for (let k of Object.keys(products)) {
       const product = products[k];
-      const article = ProductList.template.content.cloneNode(true);
+      const template = await this._getTemplate(this.#template);
+      const article = template.content.cloneNode(true);
       article.querySelector('article[itemscope]')?.setAttribute('itemid', product.id);
       article.querySelectorAll('*[itemprop]').forEach(e => this._setStaticValues(e, product));
       this.append(article);
@@ -49,6 +45,29 @@ class ProductList extends HTMLElement {
     // watch for changes
     window.addEventListener('cart:changed', this._setCartValues.bind(this));
     this._setCartValues();
+  }
+
+  // Retrieve the specified template from the templates folder,
+  // if not added to the document already, and add it to the body
+  // so that it is fetched only once
+  async _getTemplate(templateId) {
+    const id = `${templateId}-template`;
+    const selector = `#${id}`;
+    var result = document.body.querySelector(selector);
+    if(result) {
+      return result;
+    }
+    const url = `./templates/${id}.html`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error retrieving template file ${url}`);
+    }
+    document.body.insertAdjacentHTML('beforeend', await response.text());
+    result = document.body.querySelector(selector);
+    if(!result) {
+      throw new Error(`Template not found in body: ${url}`);
+    }
+    return result;
   }
 
   // set values from the current cart state
