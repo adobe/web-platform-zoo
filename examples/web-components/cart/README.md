@@ -10,14 +10,15 @@ It is meant as a tutorial to demonstrate:
 - When use Shadow DOM and how to benefit from CSS and DOM scoping
 - Using Custom Events for commands and state propagation
 - How to implement accessibility with Web Components
+- How to keep excellent [Core Web Vitals](https://pagespeed.web.dev/analysis/https-opensource-adobe-com-web-platform-zoo-examples-web-components-cart/93ktr4lvg8?form_factor=mobile) when doing all that
 
 ## Status
 
-As of November 8th this is ready for code review.
+As of February 1st, 2024:
 
-Accessibility still needs to be tested and possibly improved.
-
-This README needs to be fleshed out to explain the design decisions and recommendations.
+- Accessibility still needs to be tested and possibly improved.
+- This README needs to be fleshed out to explain the design decisions and recommendations.
+- Link to our upcoming blog posts on parts of this example.
 
 ## How many components?
 
@@ -36,6 +37,7 @@ But after trying to make it as simple as possible we end up with:
 - Product list, retrieves products from the cart logic and renders them
 - Cart status, displays a summary of the cart contents
 - Generic Increment/decrement input control
+- A few auxiliary things for a11y and performance logs
 
 ## HTML Microdata for templating
 
@@ -47,6 +49,8 @@ For example, the text content of
     <p itemprop="description" class="description"></p>
 
 is replaced by the current product's _description_ field value.
+
+The components read HTML templates from files, making it easy to change layouts as needed.
 
 
 ## No build step required
