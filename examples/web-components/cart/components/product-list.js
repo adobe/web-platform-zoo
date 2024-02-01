@@ -87,6 +87,7 @@ class ProductList extends HTMLElement {
     const prop = e.getAttribute('itemprop');
     if (prop === 'image') {
       e.setAttribute('src', `./images/${product.image}`);
+      e.setAttribute('alt', `${product.name}`);
     } else if (product[prop]) {
       e.textContent = product[prop];
     }
