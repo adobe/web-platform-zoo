@@ -1,6 +1,6 @@
 echo "{"
 first=1
-ls ../images/*.jpg | sort -R | while read f
+ls ../images/*.webp | sort -R | while read f
 do
   if [[ $first -ne 1 ]]
   then
@@ -8,7 +8,7 @@ do
   fi
   first=0
   filename=$(basename $f)
-  id=$(echo $filename | sed 's/.jpg//')
+  id=$(echo $filename | sed 's/.webp//')
   cat=$(echo $id | sed 's/-.*//')
   echo "\"$id\":{"
   echo "\"name\":\"$id\","

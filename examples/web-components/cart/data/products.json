@@ -3,7 +3,7 @@
 "name":"bottle-1698670794",
 "category":"bottle",
 "description":"Description of the bottle-1698670794",
-"image":"bottle-1698670794.jpg",
+"image":"bottle-1698670794.webp",
 "price":"17"
 }
 ,
@@ -11,7 +11,7 @@
 "name":"knife-1698670988",
 "category":"knife",
 "description":"Description of the knife-1698670988",
-"image":"knife-1698670988.jpg",
+"image":"knife-1698670988.webp",
 "price":"21"
 }
 ,
@@ -19,7 +19,7 @@
 "name":"bottle-1698670789",
 "category":"bottle",
 "description":"Description of the bottle-1698670789",
-"image":"bottle-1698670789.jpg",
+"image":"bottle-1698670789.webp",
 "price":"19"
 }
 ,
@@ -27,7 +27,7 @@
 "name":"knife-1698670984",
 "category":"knife",
 "description":"Description of the knife-1698670984",
-"image":"knife-1698670984.jpg",
+"image":"knife-1698670984.webp",
 "price":"8"
 }
 ,
@@ -35,7 +35,7 @@
 "name":"wine-1698671080",
 "category":"wine",
 "description":"Description of the wine-1698671080",
-"image":"wine-1698671080.jpg",
+"image":"wine-1698671080.webp",
 "price":"5"
 }
 ,
@@ -43,7 +43,7 @@
 "name":"wine-1698671085",
 "category":"wine",
 "description":"Description of the wine-1698671085",
-"image":"wine-1698671085.jpg",
+"image":"wine-1698671085.webp",
 "price":"15"
 }
 ,
@@ -51,7 +51,7 @@
 "name":"knife-1698670983",
 "category":"knife",
 "description":"Description of the knife-1698670983",
-"image":"knife-1698670983.jpg",
+"image":"knife-1698670983.webp",
 "price":"10"
 }
 ,
@@ -59,7 +59,7 @@
 "name":"wine-1698671079",
 "category":"wine",
 "description":"Description of the wine-1698671079",
-"image":"wine-1698671079.jpg",
+"image":"wine-1698671079.webp",
 "price":"6"
 }
 ,
@@ -67,7 +67,7 @@
 "name":"knife-1698670987",
 "category":"knife",
 "description":"Description of the knife-1698670987",
-"image":"knife-1698670987.jpg",
+"image":"knife-1698670987.webp",
 "price":"16"
 }
 ,
@@ -75,7 +75,7 @@
 "name":"bottle-1698670790",
 "category":"bottle",
 "description":"Description of the bottle-1698670790",
-"image":"bottle-1698670790.jpg",
+"image":"bottle-1698670790.webp",
 "price":"13"
 }
 ,
@@ -83,7 +83,7 @@
 "name":"knife-1698670986",
 "category":"knife",
 "description":"Description of the knife-1698670986",
-"image":"knife-1698670986.jpg",
+"image":"knife-1698670986.webp",
 "price":"18"
 }
 ,
@@ -91,7 +91,7 @@
 "name":"wine-1698671083",
 "category":"wine",
 "description":"Description of the wine-1698671083",
-"image":"wine-1698671083.jpg",
+"image":"wine-1698671083.webp",
 "price":"8"
 }
 ,
@@ -99,7 +99,7 @@
 "name":"wine-1698671086",
 "category":"wine",
 "description":"Description of the wine-1698671086",
-"image":"wine-1698671086.jpg",
+"image":"wine-1698671086.webp",
 "price":"15"
 }
 ,
@@ -107,7 +107,7 @@
 "name":"bottle-1698670795",
 "category":"bottle",
 "description":"Description of the bottle-1698670795",
-"image":"bottle-1698670795.jpg",
+"image":"bottle-1698670795.webp",
 "price":"20"
 }
 ,
@@ -115,7 +115,7 @@
 "name":"bottle-1698670792",
 "category":"bottle",
 "description":"Description of the bottle-1698670792",
-"image":"bottle-1698670792.jpg",
+"image":"bottle-1698670792.webp",
 "price":"9"
 }
 ,
@@ -123,7 +123,7 @@
 "name":"wine-1698671082",
 "category":"wine",
 "description":"Description of the wine-1698671082",
-"image":"wine-1698671082.jpg",
+"image":"wine-1698671082.webp",
 "price":"17"
 }
 ,
@@ -131,7 +131,7 @@
 "name":"bottle-1698670796",
 "category":"bottle",
 "description":"Description of the bottle-1698670796",
-"image":"bottle-1698670796.jpg",
+"image":"bottle-1698670796.webp",
 "price":"6"
 }
 ,
@@ -139,7 +139,7 @@
 "name":"knife-1698670985",
 "category":"knife",
 "description":"Description of the knife-1698670985",
-"image":"knife-1698670985.jpg",
+"image":"knife-1698670985.webp",
 "price":"16"
 }
 ,
@@ -147,7 +147,7 @@
 "name":"knife-1698670989",
 "category":"knife",
 "description":"Description of the knife-1698670989",
-"image":"knife-1698670989.jpg",
+"image":"knife-1698670989.webp",
 "price":"10"
 }
 ,
@@ -155,7 +155,7 @@
 "name":"bottle-1698670791",
 "category":"bottle",
 "description":"Description of the bottle-1698670791",
-"image":"bottle-1698670791.jpg",
+"image":"bottle-1698670791.webp",
 "price":"10"
 }
 ,
@@ -163,7 +163,7 @@
 "name":"bottle-1698670793",
 "category":"bottle",
 "description":"Description of the bottle-1698670793",
-"image":"bottle-1698670793.jpg",
+"image":"bottle-1698670793.webp",
 "price":"4"
 }
 ,
@@ -171,7 +171,7 @@
 "name":"wine-1698671087",
 "category":"wine",
 "description":"Description of the wine-1698671087",
-"image":"wine-1698671087.jpg",
+"image":"wine-1698671087.webp",
 "price":"21"
 }
 ,
@@ -179,7 +179,7 @@
 "name":"wine-1698671081",
 "category":"wine",
 "description":"Description of the wine-1698671081",
-"image":"wine-1698671081.jpg",
+"image":"wine-1698671081.webp",
 "price":"22"
 }
 ,
@@ -187,7 +187,7 @@
 "name":"knife-1698670994",
 "category":"knife",
 "description":"Description of the knife-1698670994",
-"image":"knife-1698670994.jpg",
+"image":"knife-1698670994.webp",
 "price":"12"
 }
 }
