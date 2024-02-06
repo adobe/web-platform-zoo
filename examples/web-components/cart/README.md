@@ -5,9 +5,9 @@ This is a work in progress example, which implements a shopping cart using Web C
 
 It is meant as a tutorial to demonstrate:
 
-- How to design Web Components without using the [Web Platform](https://en.wikipedia.org/wiki/Web_platform) only, no libraries, to demonstrate the basic principles
+- How to design Web Components using the [Web Platform](https://en.wikipedia.org/wiki/Web_platform) only, no libraries, to demonstrate the basic principles
 - How to (hopefully) find the right balance between reusability and simplicity
-- When use Shadow DOM and how to benefit from CSS and DOM scoping
+- When use Shadow DOM (see below) and how to benefit from CSS and DOM scoping
 - Using Custom Events for commands and state propagation
 - How to implement accessibility with Web Components
 - How to keep excellent [Core Web Vitals](https://pagespeed.web.dev/analysis/https-opensource-adobe-com-web-platform-zoo-examples-web-components-cart/93ktr4lvg8?form_factor=mobile) when doing all that
@@ -18,7 +18,6 @@ As of February 1st, 2024:
 
 - Accessibility still needs to be tested and possibly improved.
 - This README needs to be fleshed out to explain the design decisions and recommendations.
-- Link to our upcoming blog posts on parts of this example.
 
 ## How many components?
 
@@ -52,6 +51,7 @@ is replaced by the current product's _description_ field value.
 
 The components read HTML templates from files, making it easy to change layouts as needed.
 
+TODO link to "Templating? with templates!" blog post.
 
 ## No build step required
 
@@ -59,13 +59,12 @@ TODO explain the greatness of this
 
 ## Staying close to the Web Platform
 
-TODO what would a library like Lit bring?
+TODO performance, durability, standards...
 
 ## Shadow DOM or not?
 
-- Yes if you _really_ need CSS isolation
+- No, unless one of the text statements is very, very true. TODO explain why
+- Yes if you _really_ need CSS isolation that cannot be provided otherwise
 - Yes if the component's CSS is complicated or "precious" enough to warrant having it local to the component
 - Yes if it makes your component's code much simpler, thanks to scoped element IDs for example
 - Yes if it makes using the component simpler or more self-explaining
-
-TODO any downsides to using Shadow DOM?
