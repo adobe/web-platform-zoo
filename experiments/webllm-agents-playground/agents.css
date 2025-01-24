@@ -1,0 +1,20 @@
+textarea {
+  width: 100%;
+  height: auto;
+  background-color: ghostwhite;
+}
+
+.note {
+  font-size: 80%;
+  font-style: italic;
+}
+
+.error {
+  font-weight: bold;
+  color: red;
+}
+
+.status {
+  color: blue;
+  font-weight: bold;
+}

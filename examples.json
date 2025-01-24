@@ -64,4 +64,11 @@
   "tags": [ "webcomponent", "visibility" ]
 }
 },
+{
+"path":"./experiments/webllm-agents-playground/",
+"data": {
+  "name": "WebLLM Agents Playground",
+  "tags": [ "ai", "agents" ]
+}
+},
 {}]}
