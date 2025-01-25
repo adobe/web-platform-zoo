@@ -70,7 +70,8 @@ async function main() {
   const initProgressCallback = (report) => {
     setInfo('status', report.text);
   };
-  const selectedModel = 'Llama-3.2-1B-Instruct-q0f16-MLC';
+  //const selectedModel = 'Llama-3.2-1B-Instruct-q0f16-MLC';
+  const selectedModel = 'Llama-3.2-1B-Instruct-q4f16_1-MLC';
   setInfo('model', selectedModel);
   engine = await webllm.CreateMLCEngine(
     selectedModel,
