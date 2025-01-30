@@ -16,6 +16,7 @@ textarea {
 
 .warning {
   background-color: red;
-  color:yellow;
+  color:white;
   padding: 1em;
+  border-left: solid yellow 1em;
 }

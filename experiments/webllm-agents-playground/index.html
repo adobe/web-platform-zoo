@@ -16,12 +16,16 @@
       <li><a href="../../">Home</a></li>
     </ul>
   </nav>
-  <h1>AI Agents playground</h1>
+  <h1>Experimental AI Agents/WebLLM playground</h1>
   <p class="warning">
     This is <b>experimental</b>, run at your own risk!
     <br/>
+    There is a remote possibility that running this example might even
+    <em>crash your computer</em> - take appropriate precautions before
+    hitting the "run" button below.
+    <br/>
     The results are meant as examples only, and as is common with large language
-    models you might get surprising results, depending on which language model you select.
+    models you might get surprising results, depending on which model you select.
     <br/>
     Those results are not meant to be used aynwhere except in this experiment.
     <br/>
@@ -29,39 +33,37 @@
     when you run the agents below.
   </p>
   <p>
-    This page is meant to help you understand the basics of how AI agents work.
-    It runs 3 agents locally in your browser, using <a href="https://webllm.mlc.ai/">WebLLM</a>.
-  </p>
-  <p>
-    The first run takes some time as the language model is 
-    downloaded in your browser. Once that's done, the example agents
-    take a few seconds or even minutes to run, depending on the selected model and on how
-    powerful your computer is.
-  </p>
-  <p>
-    The agents are defined below, in plain text that you can
-    modify at will to experiment.
+    This page is an experiment with client-side Large Language Models, meant to help you understand the basics
+    of how AI agents work.
+    It runs 3 agents <em>locally in your browser</em>, using <a href="https://webllm.mlc.ai/">WebLLM</a>.
   </p>
   <p>
     An input text, found below, is fed to the first agent, and other agents get
     the output of the previous one as their input.
   </p>
   <p>
-    To run this, your browser needs to support WebGPU.
-    You'll get an error message if that's not the case, in the "status"
-    field of the "output" section. Recent versions of Chrome work.
+    The first run may take some time as the language model downloads to your browser.
+    After that, the example agents will take a few seconds to a few minutes to run,
+    depending on the selected model and your computer's power.
+    Try a smaller model initially, as indicated by the "size" value
+    in the list of models below.
   </p>
   <p>
-    Look at the "output" section at the end of this page to see what's
-    happening, as well as the results. The agents run automatically when
-    the page is loaded, and you can run them again using the "run" button 
-    in that section of the page.
+    To run this, your browser needs to support <a href="https://www.w3.org/TR/webgpu/">WebGPU</a>.
+    You'll get an error message if that's not the case, in the "output" section below.
+    Recent versions of Chrome work, see <a href="https://caniuse.com/?search=webgpu">caniuse.com</a>.
+  </p>
+  <p>
+    After starting the agents with the below button, look at the "output" section at the end of
+    this page to see what's happening and get the results.
   </p>
   <h2>Agent Definitions</h2>
   <p>
-    As mentioned, you can tweak these definitions as much as you want!
-    Use the "run" button below to re-execute the agents after
+    In this section, you can tweak the agent definitions as much as you want.
+    Use the "run" button below to re-execute them after
     modifying their parameters.
+    Starting without changes is recommended so that you get some initial results
+    to help you understand how this all works.
   </p>
   <p>
     The code that runs these agents is quite simple, and all agents run the same code. 
