@@ -112,6 +112,14 @@ async function runAgents() {
 async function main() {
   setInfo( 'Initializing..');
 
+  // Cleanup textarea
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.textContent = ta.textContent
+      .replace(/ +/g, ' ')
+      .replace(/\n /g, '\n')
+      .trim();
+  });
+
   // Load the list of models
   modelSelector.innerHTML = '';
   for(var model of webllm.prebuiltAppConfig.model_list) {
