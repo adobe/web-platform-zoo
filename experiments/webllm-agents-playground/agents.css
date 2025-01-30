@@ -9,12 +9,13 @@ textarea {
   font-style: italic;
 }
 
-.error {
-  font-weight: bold;
-  color: red;
-}
-
 .status {
   color: blue;
   font-weight: bold;
+}
+
+.warning {
+  background-color: red;
+  color:yellow;
+  padding: 1em;
 }
