@@ -92,10 +92,13 @@ async function runAgents() {
       const duration = performance.now() - start;
       const output = reply?.choices[0]?.message?.content;
       const elapsed = Math.floor(duration / 1000);
+      const tpot = reply.usage?.extra?.time_per_output_token_s;
+      const tps = tpot && tpot > 0 ? (1/tpot).toFixed(1) : '????';
 
       const t = document.querySelector('#output-one').content.cloneNode(true);
       t.querySelector('[class=name]').textContent = a.name;
       t.querySelector('[class=elapsed]').textContent = elapsed;
+      t.querySelector('[class=tps]').textContent = tps;
       t.querySelector('[class=input]').textContent = displayedInput;
       displayedInput = '(the output of the previous agent is used)';
       t.querySelector('[class=output]').textContent = output;
