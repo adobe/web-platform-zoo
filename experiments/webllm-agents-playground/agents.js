@@ -13,7 +13,9 @@ const knownToWorkModels = [
   'Qwen2-0.5B-Instruct-q4f16_1-MLC',
   'Llama-3.2-1B-Instruct-q4f32_1-MLC',
   'Llama-3.2-1B-Instruct-q4f16_1-MLC',
-  'DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC'
+  'DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC',
+  'Phi-3.5-mini-instruct-q4f32_1-MLC-1k',
+  'Mistral-7B-Instruct-v0.3-q4f16_1-MLC'
 ];
 const defaultModel = 'Llama-3.2-1B-Instruct-q4f16_1-MLC';
 
@@ -115,6 +117,7 @@ async function main() {
   for(var model of webllm.prebuiltAppConfig.model_list) {
     const option = document.createElement('option');
     if(!knownToWorkModels.includes(model.model_id)) {
+      console.log('ignoring model', model.model_id, 'size', getModelSizeFactor(model));
       continue;
     }
     option.textContent = model.model_id;
